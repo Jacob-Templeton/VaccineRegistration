@@ -39,6 +39,7 @@ struct ContentView: View {
                 case 0:
                     NavigationView{
                         FormView()
+                            .navigationTitle("Registration Form")
                     }
                 
                 case 1:
@@ -102,29 +103,11 @@ struct ContentView: View {
     }
 }
 
-// Calendar popup handling
-
-struct NoHitTesting: ViewModifier {
-    func body(content: Content) -> some View {
-        SwiftUIWrapper { content }.allowsHitTesting(false)
-    }
-}
-
 extension View {
-    func userInteractionDisabled() -> some View {
-        self.modifier(NoHitTesting())
+    func hideKeyboard() {
+        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
     }
 }
-
-struct SwiftUIWrapper<T: View>: UIViewControllerRepresentable {
-    let content: () -> T
-    func makeUIViewController(context: Context) -> UIHostingController<T> {
-        UIHostingController(rootView: content())
-    }
-    func updateUIViewController(_ uiViewController: UIHostingController<T>, context: Context) {}
-}
-
-//
 
 extension View {
     func placeholder<Content: View>(

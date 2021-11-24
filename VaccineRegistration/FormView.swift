@@ -19,39 +19,35 @@ struct FormView : View {
     @State private var typeOfVaccine: String = ""
     
     var body : some View {
-        NavigationView {
-            VStack(alignment: .leading){
-                TextField("Name:", text: $name)
-                    .font(.title2)
+        Form {
+            Section(header: Text("Personal Info")){
+                TextField("Full Name:", text: $name)
                 
-                Spacer()
+                DatePicker("Birthdate", selection: $birthday, displayedComponents: .date)
+            
+                DatePicker("Vaccine Date", selection: $dateOfVaccine, displayedComponents: .date)
                 
-                ZStack(alignment: .leading) {
-                    DatePicker("Birthday", selection: $birthday, displayedComponents: [.date])
-                        .datePickerStyle(CompactDatePickerStyle())
-                        .labelsHidden()
-                    Image(systemName: "calendar")
-                        .resizable()
-                        .frame(width: 32, height: 32, alignment: .leading)
-                        .userInteractionDisabled()
+                Menu("Gender") {
+                    Button("Male", action: {gender = "Male"})
+                    Button("Female", action: {gender = "Female"})
+                    Button("Other", action: {gender = "Other"})
                 }
                 
-                Spacer()
-                
-                ZStack(alignment: .leading) {
-                    DatePicker("VaccineDate", selection: $dateOfVaccine, displayedComponents: [.date])
-                        .datePickerStyle(CompactDatePickerStyle())
-                        .labelsHidden()
-                    Image(systemName: "calendar")
-                        .resizable()
-                        .frame(width: 32, height: 32, alignment: .leading)
-                        .userInteractionDisabled()
+                Menu("Vaccine Type") {
+                    Button("Hepatitis A", action: {typeOfVaccine = "Hepatitis A"})
+                    Button("Hepatitis B", action: {typeOfVaccine = "Hepatitis B"})
+                    Button("Coronavirus", action: {typeOfVaccine = "Coronavirus"})
+                    Button("Measles, Mumps, and Rubella", action: {typeOfVaccine = "MMR"})
+                    Button("Chickenpox", action: {typeOfVaccine = "Chickenpox"})
+                    Button("Polio", action: {typeOfVaccine = "Polio"})
                 }
             }
-            .padding()
-            
-            
         }
+        .accentColor(.red)
+        .onTapGesture {
+            hideKeyboard()
+        }
+        
     }
     
     private func addPerson() {
