@@ -7,19 +7,19 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5C02E27B274E92E10076427A /* VaccineRegistration.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5C02E279274E92E10076427A /* VaccineRegistration.xcdatamodeld */; };
 		5CB5FE74274E3FAD00950B44 /* FormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CB5FE73274E3FAD00950B44 /* FormView.swift */; };
 		5CB5FE78274E456500950B44 /* QueryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CB5FE77274E456500950B44 /* QueryView.swift */; };
 		5CB5FE7B274E48CC00950B44 /* Person+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CB5FE79274E48CC00950B44 /* Person+CoreDataClass.swift */; };
 		5CB5FE7C274E48CC00950B44 /* Person+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CB5FE7A274E48CC00950B44 /* Person+CoreDataProperties.swift */; };
-		5CC3B17E274B7D9700D84243 /* Vaccine_RegistrationApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC3B17D274B7D9700D84243 /* Vaccine_RegistrationApp.swift */; };
+		5CC3B17E274B7D9700D84243 /* VaccineRegistrationApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC3B17D274B7D9700D84243 /* VaccineRegistrationApp.swift */; };
 		5CC3B180274B7D9700D84243 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC3B17F274B7D9700D84243 /* ContentView.swift */; };
 		5CC3B182274B7D9B00D84243 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5CC3B181274B7D9B00D84243 /* Assets.xcassets */; };
 		5CC3B185274B7D9B00D84243 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5CC3B184274B7D9B00D84243 /* Preview Assets.xcassets */; };
 		5CC3B187274B7D9B00D84243 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC3B186274B7D9B00D84243 /* Persistence.swift */; };
-		5CC3B18A274B7D9B00D84243 /* Vaccine_Registration.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5CC3B188274B7D9B00D84243 /* Vaccine_Registration.xcdatamodeld */; };
-		5CC3B194274B7D9C00D84243 /* Vaccine_RegistrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC3B193274B7D9C00D84243 /* Vaccine_RegistrationTests.swift */; };
-		5CC3B19E274B7D9C00D84243 /* Vaccine_RegistrationUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC3B19D274B7D9C00D84243 /* Vaccine_RegistrationUITests.swift */; };
-		5CC3B1A0274B7D9C00D84243 /* Vaccine_RegistrationUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC3B19F274B7D9C00D84243 /* Vaccine_RegistrationUITestsLaunchTests.swift */; };
+		5CC3B194274B7D9C00D84243 /* VaccineRegistrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC3B193274B7D9C00D84243 /* VaccineRegistrationTests.swift */; };
+		5CC3B19E274B7D9C00D84243 /* VaccineRegistrationUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC3B19D274B7D9C00D84243 /* VaccineRegistrationUITests.swift */; };
+		5CC3B1A0274B7D9C00D84243 /* VaccineRegistrationUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC3B19F274B7D9C00D84243 /* VaccineRegistrationUITestsLaunchTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,22 +40,22 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		5C02E27A274E92E10076427A /* Vaccine_Registration.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Vaccine_Registration.xcdatamodel; sourceTree = "<group>"; };
 		5CB5FE73274E3FAD00950B44 /* FormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormView.swift; sourceTree = "<group>"; };
 		5CB5FE77274E456500950B44 /* QueryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueryView.swift; sourceTree = "<group>"; };
 		5CB5FE79274E48CC00950B44 /* Person+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Person+CoreDataClass.swift"; sourceTree = "<group>"; };
 		5CB5FE7A274E48CC00950B44 /* Person+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Person+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		5CC3B17A274B7D9700D84243 /* Vaccine Registration.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Vaccine Registration.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		5CC3B17D274B7D9700D84243 /* Vaccine_RegistrationApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vaccine_RegistrationApp.swift; sourceTree = "<group>"; };
+		5CC3B17A274B7D9700D84243 /* VaccineRegistration.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VaccineRegistration.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		5CC3B17D274B7D9700D84243 /* VaccineRegistrationApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VaccineRegistrationApp.swift; sourceTree = "<group>"; };
 		5CC3B17F274B7D9700D84243 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		5CC3B181274B7D9B00D84243 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5CC3B184274B7D9B00D84243 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		5CC3B186274B7D9B00D84243 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
-		5CC3B189274B7D9B00D84243 /* Vaccine_Registration.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Vaccine_Registration.xcdatamodel; sourceTree = "<group>"; };
-		5CC3B18F274B7D9C00D84243 /* Vaccine RegistrationTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Vaccine RegistrationTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		5CC3B193274B7D9C00D84243 /* Vaccine_RegistrationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vaccine_RegistrationTests.swift; sourceTree = "<group>"; };
-		5CC3B199274B7D9C00D84243 /* Vaccine RegistrationUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Vaccine RegistrationUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		5CC3B19D274B7D9C00D84243 /* Vaccine_RegistrationUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vaccine_RegistrationUITests.swift; sourceTree = "<group>"; };
-		5CC3B19F274B7D9C00D84243 /* Vaccine_RegistrationUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vaccine_RegistrationUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		5CC3B18F274B7D9C00D84243 /* VaccineRegistrationTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VaccineRegistrationTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		5CC3B193274B7D9C00D84243 /* VaccineRegistrationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VaccineRegistrationTests.swift; sourceTree = "<group>"; };
+		5CC3B199274B7D9C00D84243 /* VaccineRegistrationUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VaccineRegistrationUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		5CC3B19D274B7D9C00D84243 /* VaccineRegistrationUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VaccineRegistrationUITests.swift; sourceTree = "<group>"; };
+		5CC3B19F274B7D9C00D84243 /* VaccineRegistrationUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VaccineRegistrationUITestsLaunchTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,9 +88,9 @@
 			children = (
 				5CB5FE79274E48CC00950B44 /* Person+CoreDataClass.swift */,
 				5CB5FE7A274E48CC00950B44 /* Person+CoreDataProperties.swift */,
-				5CC3B17C274B7D9700D84243 /* Vaccine Registration */,
-				5CC3B192274B7D9C00D84243 /* Vaccine RegistrationTests */,
-				5CC3B19C274B7D9C00D84243 /* Vaccine RegistrationUITests */,
+				5CC3B17C274B7D9700D84243 /* VaccineRegistration */,
+				5CC3B192274B7D9C00D84243 /* VaccineRegistrationTests */,
+				5CC3B19C274B7D9C00D84243 /* VaccineRegistrationUITests */,
 				5CC3B17B274B7D9700D84243 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -98,26 +98,26 @@
 		5CC3B17B274B7D9700D84243 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				5CC3B17A274B7D9700D84243 /* Vaccine Registration.app */,
-				5CC3B18F274B7D9C00D84243 /* Vaccine RegistrationTests.xctest */,
-				5CC3B199274B7D9C00D84243 /* Vaccine RegistrationUITests.xctest */,
+				5CC3B17A274B7D9700D84243 /* VaccineRegistration.app */,
+				5CC3B18F274B7D9C00D84243 /* VaccineRegistrationTests.xctest */,
+				5CC3B199274B7D9C00D84243 /* VaccineRegistrationUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		5CC3B17C274B7D9700D84243 /* Vaccine Registration */ = {
+		5CC3B17C274B7D9700D84243 /* VaccineRegistration */ = {
 			isa = PBXGroup;
 			children = (
-				5CC3B17D274B7D9700D84243 /* Vaccine_RegistrationApp.swift */,
+				5CC3B17D274B7D9700D84243 /* VaccineRegistrationApp.swift */,
 				5CC3B17F274B7D9700D84243 /* ContentView.swift */,
 				5CB5FE73274E3FAD00950B44 /* FormView.swift */,
 				5CB5FE77274E456500950B44 /* QueryView.swift */,
 				5CC3B181274B7D9B00D84243 /* Assets.xcassets */,
 				5CC3B186274B7D9B00D84243 /* Persistence.swift */,
-				5CC3B188274B7D9B00D84243 /* Vaccine_Registration.xcdatamodeld */,
+				5C02E279274E92E10076427A /* VaccineRegistration.xcdatamodeld */,
 				5CC3B183274B7D9B00D84243 /* Preview Content */,
 			);
-			path = "Vaccine Registration";
+			path = VaccineRegistration;
 			sourceTree = "<group>";
 		};
 		5CC3B183274B7D9B00D84243 /* Preview Content */ = {
@@ -128,29 +128,29 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
-		5CC3B192274B7D9C00D84243 /* Vaccine RegistrationTests */ = {
+		5CC3B192274B7D9C00D84243 /* VaccineRegistrationTests */ = {
 			isa = PBXGroup;
 			children = (
-				5CC3B193274B7D9C00D84243 /* Vaccine_RegistrationTests.swift */,
+				5CC3B193274B7D9C00D84243 /* VaccineRegistrationTests.swift */,
 			);
-			path = "Vaccine RegistrationTests";
+			path = VaccineRegistrationTests;
 			sourceTree = "<group>";
 		};
-		5CC3B19C274B7D9C00D84243 /* Vaccine RegistrationUITests */ = {
+		5CC3B19C274B7D9C00D84243 /* VaccineRegistrationUITests */ = {
 			isa = PBXGroup;
 			children = (
-				5CC3B19D274B7D9C00D84243 /* Vaccine_RegistrationUITests.swift */,
-				5CC3B19F274B7D9C00D84243 /* Vaccine_RegistrationUITestsLaunchTests.swift */,
+				5CC3B19D274B7D9C00D84243 /* VaccineRegistrationUITests.swift */,
+				5CC3B19F274B7D9C00D84243 /* VaccineRegistrationUITestsLaunchTests.swift */,
 			);
-			path = "Vaccine RegistrationUITests";
+			path = VaccineRegistrationUITests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		5CC3B179274B7D9600D84243 /* Vaccine Registration */ = {
+		5CC3B179274B7D9600D84243 /* VaccineRegistration */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 5CC3B1A3274B7D9C00D84243 /* Build configuration list for PBXNativeTarget "Vaccine Registration" */;
+			buildConfigurationList = 5CC3B1A3274B7D9C00D84243 /* Build configuration list for PBXNativeTarget "VaccineRegistration" */;
 			buildPhases = (
 				5CC3B176274B7D9600D84243 /* Sources */,
 				5CC3B177274B7D9600D84243 /* Frameworks */,
@@ -160,14 +160,14 @@
 			);
 			dependencies = (
 			);
-			name = "Vaccine Registration";
+			name = VaccineRegistration;
 			productName = "Vaccine Registration";
-			productReference = 5CC3B17A274B7D9700D84243 /* Vaccine Registration.app */;
+			productReference = 5CC3B17A274B7D9700D84243 /* VaccineRegistration.app */;
 			productType = "com.apple.product-type.application";
 		};
-		5CC3B18E274B7D9C00D84243 /* Vaccine RegistrationTests */ = {
+		5CC3B18E274B7D9C00D84243 /* VaccineRegistrationTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 5CC3B1A6274B7D9C00D84243 /* Build configuration list for PBXNativeTarget "Vaccine RegistrationTests" */;
+			buildConfigurationList = 5CC3B1A6274B7D9C00D84243 /* Build configuration list for PBXNativeTarget "VaccineRegistrationTests" */;
 			buildPhases = (
 				5CC3B18B274B7D9C00D84243 /* Sources */,
 				5CC3B18C274B7D9C00D84243 /* Frameworks */,
@@ -178,14 +178,14 @@
 			dependencies = (
 				5CC3B191274B7D9C00D84243 /* PBXTargetDependency */,
 			);
-			name = "Vaccine RegistrationTests";
+			name = VaccineRegistrationTests;
 			productName = "Vaccine RegistrationTests";
-			productReference = 5CC3B18F274B7D9C00D84243 /* Vaccine RegistrationTests.xctest */;
+			productReference = 5CC3B18F274B7D9C00D84243 /* VaccineRegistrationTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		5CC3B198274B7D9C00D84243 /* Vaccine RegistrationUITests */ = {
+		5CC3B198274B7D9C00D84243 /* VaccineRegistrationUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 5CC3B1A9274B7D9C00D84243 /* Build configuration list for PBXNativeTarget "Vaccine RegistrationUITests" */;
+			buildConfigurationList = 5CC3B1A9274B7D9C00D84243 /* Build configuration list for PBXNativeTarget "VaccineRegistrationUITests" */;
 			buildPhases = (
 				5CC3B195274B7D9C00D84243 /* Sources */,
 				5CC3B196274B7D9C00D84243 /* Frameworks */,
@@ -196,9 +196,9 @@
 			dependencies = (
 				5CC3B19B274B7D9C00D84243 /* PBXTargetDependency */,
 			);
-			name = "Vaccine RegistrationUITests";
+			name = VaccineRegistrationUITests;
 			productName = "Vaccine RegistrationUITests";
-			productReference = 5CC3B199274B7D9C00D84243 /* Vaccine RegistrationUITests.xctest */;
+			productReference = 5CC3B199274B7D9C00D84243 /* VaccineRegistrationUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
@@ -237,9 +237,9 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				5CC3B179274B7D9600D84243 /* Vaccine Registration */,
-				5CC3B18E274B7D9C00D84243 /* Vaccine RegistrationTests */,
-				5CC3B198274B7D9C00D84243 /* Vaccine RegistrationUITests */,
+				5CC3B179274B7D9600D84243 /* VaccineRegistration */,
+				5CC3B18E274B7D9C00D84243 /* VaccineRegistrationTests */,
+				5CC3B198274B7D9C00D84243 /* VaccineRegistrationUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -276,13 +276,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				5CB5FE7B274E48CC00950B44 /* Person+CoreDataClass.swift in Sources */,
+				5C02E27B274E92E10076427A /* VaccineRegistration.xcdatamodeld in Sources */,
 				5CB5FE78274E456500950B44 /* QueryView.swift in Sources */,
 				5CB5FE7C274E48CC00950B44 /* Person+CoreDataProperties.swift in Sources */,
-				5CC3B18A274B7D9B00D84243 /* Vaccine_Registration.xcdatamodeld in Sources */,
 				5CC3B187274B7D9B00D84243 /* Persistence.swift in Sources */,
 				5CB5FE74274E3FAD00950B44 /* FormView.swift in Sources */,
 				5CC3B180274B7D9700D84243 /* ContentView.swift in Sources */,
-				5CC3B17E274B7D9700D84243 /* Vaccine_RegistrationApp.swift in Sources */,
+				5CC3B17E274B7D9700D84243 /* VaccineRegistrationApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -290,7 +290,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5CC3B194274B7D9C00D84243 /* Vaccine_RegistrationTests.swift in Sources */,
+				5CC3B194274B7D9C00D84243 /* VaccineRegistrationTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -298,8 +298,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5CC3B19E274B7D9C00D84243 /* Vaccine_RegistrationUITests.swift in Sources */,
-				5CC3B1A0274B7D9C00D84243 /* Vaccine_RegistrationUITestsLaunchTests.swift in Sources */,
+				5CC3B19E274B7D9C00D84243 /* VaccineRegistrationUITests.swift in Sources */,
+				5CC3B1A0274B7D9C00D84243 /* VaccineRegistrationUITestsLaunchTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -308,12 +308,12 @@
 /* Begin PBXTargetDependency section */
 		5CC3B191274B7D9C00D84243 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 5CC3B179274B7D9600D84243 /* Vaccine Registration */;
+			target = 5CC3B179274B7D9600D84243 /* VaccineRegistration */;
 			targetProxy = 5CC3B190274B7D9C00D84243 /* PBXContainerItemProxy */;
 		};
 		5CC3B19B274B7D9C00D84243 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 5CC3B179274B7D9600D84243 /* Vaccine Registration */;
+			target = 5CC3B179274B7D9600D84243 /* VaccineRegistration */;
 			targetProxy = 5CC3B19A274B7D9C00D84243 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -442,7 +442,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"Vaccine Registration/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"VaccineRegistration/Preview Content\"";
 				DEVELOPMENT_TEAM = TB673Q64S9;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -458,7 +458,7 @@
 				);
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.jacob.vaccineProject.Vaccine-Registration";
-				PRODUCT_NAME = "Vaccine Registration";
+				PRODUCT_NAME = VaccineRegistration;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -472,7 +472,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"Vaccine Registration/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"VaccineRegistration/Preview Content";
 				DEVELOPMENT_TEAM = TB673Q64S9;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -488,7 +488,7 @@
 				);
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.jacob.vaccineProject.Vaccine-Registration";
-				PRODUCT_NAME = "Vaccine Registration";
+				PRODUCT_NAME = VaccineRegistration;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -516,7 +516,7 @@
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Vaccine Registration.app/Vaccine Registration";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/VaccineRegistration.app/VaccineRegistration";
 			};
 			name = Debug;
 		};
@@ -541,7 +541,7 @@
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Vaccine Registration.app/Vaccine Registration";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/VaccineRegistration.app/VaccineRegistration";
 			};
 			name = Release;
 		};
@@ -603,7 +603,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		5CC3B1A3274B7D9C00D84243 /* Build configuration list for PBXNativeTarget "Vaccine Registration" */ = {
+		5CC3B1A3274B7D9C00D84243 /* Build configuration list for PBXNativeTarget "VaccineRegistration" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				5CC3B1A4274B7D9C00D84243 /* Debug */,
@@ -612,7 +612,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		5CC3B1A6274B7D9C00D84243 /* Build configuration list for PBXNativeTarget "Vaccine RegistrationTests" */ = {
+		5CC3B1A6274B7D9C00D84243 /* Build configuration list for PBXNativeTarget "VaccineRegistrationTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				5CC3B1A7274B7D9C00D84243 /* Debug */,
@@ -621,7 +621,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		5CC3B1A9274B7D9C00D84243 /* Build configuration list for PBXNativeTarget "Vaccine RegistrationUITests" */ = {
+		5CC3B1A9274B7D9C00D84243 /* Build configuration list for PBXNativeTarget "VaccineRegistrationUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				5CC3B1AA274B7D9C00D84243 /* Debug */,
@@ -633,13 +633,13 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		5CC3B188274B7D9B00D84243 /* Vaccine_Registration.xcdatamodeld */ = {
+		5C02E279274E92E10076427A /* VaccineRegistration.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				5CC3B189274B7D9B00D84243 /* Vaccine_Registration.xcdatamodel */,
+				5C02E27A274E92E10076427A /* Vaccine_Registration.xcdatamodel */,
 			);
-			currentVersion = 5CC3B189274B7D9B00D84243 /* Vaccine_Registration.xcdatamodel */;
-			path = Vaccine_Registration.xcdatamodeld;
+			currentVersion = 5C02E27A274E92E10076427A /* Vaccine_Registration.xcdatamodel */;
+			path = VaccineRegistration.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};
