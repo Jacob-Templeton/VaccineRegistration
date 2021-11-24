@@ -14,8 +14,12 @@ struct PersistenceController {
         let result = PersistenceController(inMemory: true)
         let viewContext = result.container.viewContext
         for _ in 0..<10 {
-            let newItem = Item(context: viewContext)
-            newItem.timestamp = Date()
+            let newPerson = Person(context: viewContext)
+            newPerson.name = "Sample Name"
+            newPerson.birthday = Date()
+            newPerson.dateOfVaccine = Date()
+            newPerson.gender = "Unknown Gender"
+            newPerson.typeOfVaccine = "Sample Vaccine"
         }
         do {
             try viewContext.save()
@@ -31,7 +35,7 @@ struct PersistenceController {
     let container: NSPersistentContainer
 
     init(inMemory: Bool = false) {
-        container = NSPersistentContainer(name: "Vaccine_Registration")
+        container = NSPersistentContainer(name: "Vaccine Registration")
         if inMemory {
             container.persistentStoreDescriptions.first!.url = URL(fileURLWithPath: "/dev/null")
         }
