@@ -9,6 +9,8 @@ import SwiftUI
 
 struct ContentView: View {
     
+    @StateObject var data = TemporaryData()
+    
     @State var selectedTabIndex = 0
     @State var shouldPresentNewWindow = false
     @State var animationAmount = 1.0
@@ -23,13 +25,14 @@ struct ContentView: View {
                 Spacer()
                     .fullScreenCover(isPresented: $shouldPresentNewWindow, content: {
                         NavigationView{
-                            Text("Tab 3")
-                                .navigationTitle("Third Tab")
+                            FormView(data: data)
+                                .navigationTitle("Registration Form")
                         }
                         Button(action: {
                             shouldPresentNewWindow.toggle()
                         }, label: {
                             Text("< Back")
+                                .foregroundColor(.blue)
                         })
                             .padding(.bottom, 20)
                     })
@@ -38,14 +41,14 @@ struct ContentView: View {
                 switch selectedTabIndex {
                 case 0:
                     NavigationView{
-                        FormView()
+                        FormView(data: data)
                             .navigationTitle("Registration Form")
                     }
                 
                 case 1:
                     NavigationView{
-                        Text("Tab 2")
-                            .navigationTitle("Fifth Tab")
+                        QueryView()
+                            .navigationTitle("Records")
                     }
                     
                 case 3:
@@ -86,7 +89,7 @@ struct ContentView: View {
                         if(index == 2){
                             Image(systemName: tabBarImages[index])
                                 .font(.system(size: 44, weight: .bold))
-                                .gradientForeground(stops: [Gradient.Stop(color: .red, location: 0.4), Gradient.Stop(color: .yellow, location: 1.0)])
+                                .foregroundGradient(stops: [Gradient.Stop(color: .purple, location: 0.4), Gradient.Stop(color: .blue, location: 0.9)])
                         } else {
                             Image(systemName: tabBarImages[index])
                                 .font(.system(size: 24, weight: .bold))
@@ -123,7 +126,7 @@ extension View {
 }
 
 extension View {
-    public func gradientForeground(stops: [Gradient.Stop], start: UnitPoint = UnitPoint.topLeading, end: UnitPoint = UnitPoint.bottomTrailing) -> some View {
+    public func foregroundGradient(stops: [Gradient.Stop], start: UnitPoint = UnitPoint.topLeading, end: UnitPoint = UnitPoint.bottomTrailing) -> some View {
         self.overlay(LinearGradient(gradient: Gradient(stops: stops),
             startPoint: start,
             endPoint: end))

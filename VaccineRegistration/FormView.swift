@@ -8,56 +8,155 @@
 import SwiftUI
 import CoreData
 
+class TemporaryData : ObservableObject {
+    @Published var name: String = ""
+    @Published var birthday = Date()
+    @Published var dateOfVaccine = Date()
+    @Published var gender: String = ""
+    @Published var typeOfVaccine: String = ""
+    @Published var id: UUID = UUID()
+}
+
+@available(iOS 15.0, *)
 struct FormView : View {
     
     @Environment(\.managedObjectContext) private var viewContext
     
-    @State private var name: String = ""
-    @State private var birthday = Date()
-    @State private var dateOfVaccine = Date()
-    @State private var gender: String = ""
-    @State private var typeOfVaccine: String = ""
+    @StateObject var data: TemporaryData
+    
+    @FocusState private var focusedName: Bool
+    @FocusState private var focusedGender: Bool
+    @FocusState private var focusedVaccineType: Bool
+    
+    @State private var isSubmitted: Bool = false
+    
+    // MARK: - Color Presets
+    private let purpleRed = [Gradient.Stop(color: .purple, location: 0.2), Gradient.Stop(color: .gray, location: 0.4), Gradient.Stop(color: .red, location: 0.6)]
     
     var body : some View {
-        Form {
-            Section(header: Text("Personal Info")){
-                TextField("Full Name:", text: $name)
-                
-                DatePicker("Birthdate", selection: $birthday, displayedComponents: .date)
-            
-                DatePicker("Vaccine Date", selection: $dateOfVaccine, displayedComponents: .date)
-                
-                Menu("Gender") {
-                    Button("Male", action: {gender = "Male"})
-                    Button("Female", action: {gender = "Female"})
-                    Button("Other", action: {gender = "Other"})
-                }
-                
-                Menu("Vaccine Type") {
-                    Button("Hepatitis A", action: {typeOfVaccine = "Hepatitis A"})
-                    Button("Hepatitis B", action: {typeOfVaccine = "Hepatitis B"})
-                    Button("Coronavirus", action: {typeOfVaccine = "Coronavirus"})
-                    Button("Measles, Mumps, and Rubella", action: {typeOfVaccine = "MMR"})
-                    Button("Chickenpox", action: {typeOfVaccine = "Chickenpox"})
-                    Button("Polio", action: {typeOfVaccine = "Polio"})
+        
+        VStack {
+            Form {
+                Section(header: Text("Personal Info")) {
+                    VStack(alignment: .leading) {
+                        TextField("Full Name:", text: $data.name)
+                            .focused($focusedName)
+                        
+                        if(!focusedName)
+                        {
+                            if(data.name.isEmpty){
+                                Text("Enter a name")
+                                    .foregroundStyle(.secondary)
+                                    .foregroundGradient(stops: purpleRed)
+                            }
+                            else if(!data.name.isAlpha){
+                                Text("Only include letters in your name")
+                                    .foregroundStyle(.secondary)
+                                    .foregroundGradient(stops: purpleRed)
+                            }
+                        }
+                    }
+                    
+                    DatePicker(selection: $data.birthday, in: ...Date(), displayedComponents: [.date]){
+                        Text("Birthdate")
+                            .foregroundColor(.purple)
+                            .font(Font.body.weight(.semibold))
+                    }
+                    
+                    DatePicker(selection: $data.dateOfVaccine, in: Date()..., displayedComponents: [.date]) {
+                        Text("Vaccine Date")
+                            .foregroundColor(.purple)
+                            .font(Font.body.weight(.semibold))
+                    }
+                        
+                    VStack(alignment: .leading) {
+                        HStack{
+                            Menu {
+                                Button("Male", action: {data.gender = "Male"})
+                                Button("Female", action: {data.gender = "Female"})
+                                Button("Other", action: {data.gender = "Other"})
+                            } label: {
+                                Text("Gender")
+                                Image(systemName: "person")
+                            }
+                            .font(Font.body.weight(.semibold))
+                            .foregroundColor(.purple)
+                            Spacer()
+                            Text("\(data.gender)")
+                        }
+                        
+                        if(!focusedGender)
+                        {
+                            if(data.gender.isEmpty){
+                                Text("Select a gender")
+                                    .foregroundStyle(.secondary)
+                                    .foregroundGradient(stops: purpleRed)
+                            }
+                        }
+                    }
+                    
+                    VStack(alignment: .leading) {
+                        HStack {
+                            Menu {
+                                Button("Hepatitis A", action: {data.typeOfVaccine = "Hepatitis A"})
+                                Button("Hepatitis B", action: {data.typeOfVaccine = "Hepatitis B"})
+                                Button("Coronavirus", action: {data.typeOfVaccine = "Coronavirus"})
+                                Button("Measles, Mumps, and Rubella", action: {data.typeOfVaccine = "MMR"})
+                                Button("Chickenpox", action: {data.typeOfVaccine = "Chickenpox"})
+                                Button("Polio", action: {data.typeOfVaccine = "Polio"})
+                            } label: {
+                                Text("Vaccine Type")
+                                Image(systemName: "text.magnifyingglass")
+                            }
+                            .font(Font.body.weight(.semibold))
+                            .foregroundColor(.purple)
+                            
+                            Spacer()
+                            Text("\(data.typeOfVaccine)")
+                        }
+                        
+                        if(!focusedVaccineType)
+                        {
+                            if(data.typeOfVaccine.isEmpty) {
+                                Text("Select a vaccine type")
+                                    .foregroundStyle(.secondary)
+                                    .foregroundGradient(stops: purpleRed)
+                            }
+                        }
+                    }
                 }
             }
+            .onTapGesture {
+                hideKeyboard()
+            }
+            
+            LargeButton(title: "Submit", backgroundColor: .purple, action: {
+                addPerson();
+                data.name = "";
+                data.birthday = Date();
+                data.dateOfVaccine = Date();
+                data.gender = "";
+                data.typeOfVaccine = "";
+                data.id = UUID()
+                isSubmitted = true;
+            })
+                .disabled(data.name.isEmpty || data.gender.isEmpty || data.typeOfVaccine.isEmpty || !data.name.isAlpha)
+                .tint(.purple)
+                .alert(isPresented: $isSubmitted) {
+                    Alert(title: Text("Form Submitted"), dismissButton: .default(Text("Okay")))
+            }
         }
-        .accentColor(.red)
-        .onTapGesture {
-            hideKeyboard()
-        }
-        
     }
     
     private func addPerson() {
         withAnimation {
             let newPerson = Person(context: viewContext)
-            newPerson.name = name
-            newPerson.birthday = birthday
-            newPerson.dateOfVaccine = dateOfVaccine
-            newPerson.gender = gender
-            newPerson.typeOfVaccine = typeOfVaccine
+            newPerson.name = data.name
+            newPerson.birthday = data.birthday
+            newPerson.dateOfVaccine = data.dateOfVaccine
+            newPerson.gender = data.gender
+            newPerson.typeOfVaccine = data.typeOfVaccine
+            newPerson.id = data.id
 
             do {
                 try viewContext.save()
@@ -71,9 +170,75 @@ struct FormView : View {
     }
 }
 
-struct FormView_Previews: PreviewProvider {
-    static var previews: some View {
-        FormView().environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
+struct LargeButtonStyle: ButtonStyle {
+    
+    let backgroundColor: Color
+    let foregroundColor: Color
+    let isDisabled: Bool
+    
+    func makeBody(configuration: Self.Configuration) -> some View {
+        let currentForegroundColor = isDisabled || configuration.isPressed ? foregroundColor.opacity(0.3) : foregroundColor
+        return configuration.label
+            .padding()
+            .foregroundColor(currentForegroundColor)
+            .background(isDisabled || configuration.isPressed ? backgroundColor.opacity(0.3) : backgroundColor)
+            // This is the key part, we are using both an overlay as well as cornerRadius
+            .cornerRadius(10)
+            .overlay(
+                RoundedRectangle(cornerRadius: 10)
+                    .stroke(currentForegroundColor, lineWidth: 1)
+        )
+            .padding([.top, .bottom], 10)
+            .font(Font.system(size: 19, weight: .semibold))
+    }
+}
+
+struct LargeButton: View {
+    
+    private static let buttonHorizontalMargins: CGFloat = 20
+    
+    var backgroundColor: Color
+    var foregroundColor: Color
+    
+    private let title: String
+    private let action: () -> Void
+    
+    // It would be nice to make this into a binding.
+    private let disabled: Bool
+    
+    init(title: String,
+         disabled: Bool = false,
+         backgroundColor: Color = Color.green,
+         foregroundColor: Color = Color.white,
+         action: @escaping () -> Void) {
+        self.backgroundColor = backgroundColor
+        self.foregroundColor = foregroundColor
+        self.title = title
+        self.action = action
+        self.disabled = disabled
+    }
+    
+    var body: some View {
+        HStack {
+            Spacer(minLength: LargeButton.buttonHorizontalMargins)
+            Button(action:self.action) {
+                Text(self.title)
+                    .frame(maxWidth:.infinity)
+            }
+            .buttonStyle(LargeButtonStyle(backgroundColor: backgroundColor,
+                                          foregroundColor: foregroundColor,
+                                          isDisabled: disabled))
+                .disabled(self.disabled)
+            Spacer(minLength: LargeButton.buttonHorizontalMargins)
+        }
+        .frame(maxWidth:.infinity)
+    }
+}
+
+
+extension String {
+    var isAlpha: Bool {
+        return !isEmpty && range(of: "[^a-zA-Z\\s]", options: .regularExpression) == nil
     }
 }
 
