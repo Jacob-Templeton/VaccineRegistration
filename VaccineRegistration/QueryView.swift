@@ -6,46 +6,69 @@
 //
 
 import SwiftUI
+import CoreData
 
-struct QueryView: View {
+struct QueryView: View
+{
     
     @Environment(\.managedObjectContext) private var viewContext
-
-    @FetchRequest(
-        entity: Person.entity(),
-        sortDescriptors: [
-            NSSortDescriptor(keyPath: \Person.name, ascending: true),
-            NSSortDescriptor(keyPath: \Person.birthday, ascending: true),
-            NSSortDescriptor(keyPath: \Person.dateOfVaccine, ascending: true),
-            NSSortDescriptor(keyPath: \Person.gender, ascending: true),
-            NSSortDescriptor(keyPath: \Person.typeOfVaccine, ascending: true)
-        ],
-        animation: .default)
     
-    private var people: FetchedResults<Person> // ITEMS
+    let records: FetchedResults<Person>
     
-    var body: some View {
-        
-        List {
-            ForEach(people) { Person in
-                NavigationLink {
-                    Text("Item at \(Person.birthday)")
+    var body: some View
+    {
+        List
+        {
+            ForEach(records, id: \.id) { record in
+                NavigationLink
+                {
+                    VStack(alignment: .leading)
+                    {
+                        Group
+                        {
+                            Group
+                            {
+                                Text("**ID:** \(record.id)")
+                                Spacer()
+                                Text("**Name:** \(record.name)")
+                                Spacer()
+                                Text("**Birthdate:** \(record.birthday)")
+                                Spacer()
+                            }
+                            Group
+                            {
+                                Text("**Vaccination Date:** \(record.dateOfVaccine)")
+                                Spacer()
+                                Text("**Gender:** \(record.gender)")
+                                Spacer()
+                                Text("**Vaccination Type:** \(record.typeOfVaccine)")
+                                Spacer()
+                            }
+                        }
+                    }
+                .navigationTitle("\(record.name)")
+                .padding(EdgeInsets(top: 20, leading: 10, bottom: 20, trailing: 10))
                 } label: {
-                    Text("PlaceHolder")
+                    Text("\(record.name)'s Vaccination Record")
                 }
             }
             .onDelete(perform: deletePerson)
         }
-        .toolbar {
-            ToolbarItem(placement: .navigationBarTrailing) {
+        .toolbar
+        {
+            ToolbarItem(placement: .navigationBarTrailing)
+            {
                 EditButton()
+                    .tint(.purple)
+                    .font(Font.body.weight(.semibold))
             }
         }
     }
     
-    private func deletePerson(offsets: IndexSet) {
+    private func deletePerson(offsets: IndexSet)
+    {
         withAnimation {
-            offsets.map { people[$0] }.forEach(viewContext.delete)
+            offsets.map { records[$0] }.forEach(viewContext.delete)
 
             do {
                 try viewContext.save()
@@ -56,11 +79,5 @@ struct QueryView: View {
                 fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
             }
         }
-    }
-}
-
-struct QueryView_Previews: PreviewProvider {
-    static var previews: some View {
-        QueryView().environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
     }
 }

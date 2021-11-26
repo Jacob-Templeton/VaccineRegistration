@@ -33,23 +33,29 @@ struct FormView : View {
     // MARK: - Color Presets
     private let purpleRed = [Gradient.Stop(color: .purple, location: 0.2), Gradient.Stop(color: .gray, location: 0.4), Gradient.Stop(color: .red, location: 0.6)]
     
-    var body : some View {
-        
-        VStack {
-            Form {
-                Section(header: Text("Personal Info")) {
-                    VStack(alignment: .leading) {
+    var body : some View
+    {
+        VStack
+        {
+            Form
+            {
+                Section(header: Text("Personal Info"))
+                {
+                    VStack(alignment: .leading)
+                    {
                         TextField("Full Name:", text: $data.name)
                             .focused($focusedName)
                         
                         if(!focusedName)
                         {
-                            if(data.name.isEmpty){
+                            if(data.name.isEmpty)
+                            {
                                 Text("Enter a name")
                                     .foregroundStyle(.secondary)
                                     .foregroundGradient(stops: purpleRed)
                             }
-                            else if(!data.name.isAlpha){
+                            else if(!data.name.isAlpha)
+                            {
                                 Text("Only include letters in your name")
                                     .foregroundStyle(.secondary)
                                     .foregroundGradient(stops: purpleRed)
@@ -63,14 +69,20 @@ struct FormView : View {
                             .font(Font.body.weight(.semibold))
                     }
                     
-                    DatePicker(selection: $data.dateOfVaccine, in: Date()..., displayedComponents: [.date]) {
+                    DatePicker (
+                        selection: $data.dateOfVaccine,
+                        in: Date()...,
+                        displayedComponents: [.date] )
+                    {
                         Text("Vaccine Date")
                             .foregroundColor(.purple)
                             .font(Font.body.weight(.semibold))
                     }
                         
-                    VStack(alignment: .leading) {
-                        HStack{
+                    VStack(alignment: .leading)
+                    {
+                        HStack
+                        {
                             Menu {
                                 Button("Male", action: {data.gender = "Male"})
                                 Button("Female", action: {data.gender = "Female"})
@@ -87,7 +99,8 @@ struct FormView : View {
                         
                         if(!focusedGender)
                         {
-                            if(data.gender.isEmpty){
+                            if(data.gender.isEmpty)
+                            {
                                 Text("Select a gender")
                                     .foregroundStyle(.secondary)
                                     .foregroundGradient(stops: purpleRed)
@@ -95,8 +108,10 @@ struct FormView : View {
                         }
                     }
                     
-                    VStack(alignment: .leading) {
-                        HStack {
+                    VStack(alignment: .leading)
+                    {
+                        HStack
+                        {
                             Menu {
                                 Button("Hepatitis A", action: {data.typeOfVaccine = "Hepatitis A"})
                                 Button("Hepatitis B", action: {data.typeOfVaccine = "Hepatitis B"})
@@ -117,7 +132,8 @@ struct FormView : View {
                         
                         if(!focusedVaccineType)
                         {
-                            if(data.typeOfVaccine.isEmpty) {
+                            if(data.typeOfVaccine.isEmpty)
+                            {
                                 Text("Select a vaccine type")
                                     .foregroundStyle(.secondary)
                                     .foregroundGradient(stops: purpleRed)
@@ -148,7 +164,8 @@ struct FormView : View {
         }
     }
     
-    private func addPerson() {
+    private func addPerson()
+    {
         withAnimation {
             let newPerson = Person(context: viewContext)
             newPerson.name = data.name
@@ -170,13 +187,16 @@ struct FormView : View {
     }
 }
 
-struct LargeButtonStyle: ButtonStyle {
+struct LargeButtonStyle: ButtonStyle
+{
     
     let backgroundColor: Color
     let foregroundColor: Color
     let isDisabled: Bool
     
-    func makeBody(configuration: Self.Configuration) -> some View {
+    func makeBody(configuration: Self.Configuration) -> some View
+    {
+
         let currentForegroundColor = isDisabled || configuration.isPressed ? foregroundColor.opacity(0.3) : foregroundColor
         return configuration.label
             .padding()
@@ -187,13 +207,14 @@ struct LargeButtonStyle: ButtonStyle {
             .overlay(
                 RoundedRectangle(cornerRadius: 10)
                     .stroke(currentForegroundColor, lineWidth: 1)
-        )
+            )
             .padding([.top, .bottom], 10)
             .font(Font.system(size: 19, weight: .semibold))
     }
 }
 
-struct LargeButton: View {
+struct LargeButton: View
+{
     
     private static let buttonHorizontalMargins: CGFloat = 20
     
@@ -203,32 +224,34 @@ struct LargeButton: View {
     private let title: String
     private let action: () -> Void
     
-    // It would be nice to make this into a binding.
-    private let disabled: Bool
+    @Environment(\.isEnabled) private var isEnabled: Bool
     
     init(title: String,
          disabled: Bool = false,
          backgroundColor: Color = Color.green,
          foregroundColor: Color = Color.white,
-         action: @escaping () -> Void) {
+         action: @escaping () -> Void)
+    {
         self.backgroundColor = backgroundColor
         self.foregroundColor = foregroundColor
         self.title = title
         self.action = action
-        self.disabled = disabled
     }
     
-    var body: some View {
-        HStack {
+    var body: some View
+    {
+        HStack
+        {
             Spacer(minLength: LargeButton.buttonHorizontalMargins)
-            Button(action:self.action) {
+            Button(action:self.action)
+            {
                 Text(self.title)
                     .frame(maxWidth:.infinity)
             }
             .buttonStyle(LargeButtonStyle(backgroundColor: backgroundColor,
                                           foregroundColor: foregroundColor,
-                                          isDisabled: disabled))
-                .disabled(self.disabled)
+                                          isDisabled: !isEnabled))
+                .disabled(!isEnabled)
             Spacer(minLength: LargeButton.buttonHorizontalMargins)
         }
         .frame(maxWidth:.infinity)
@@ -236,8 +259,10 @@ struct LargeButton: View {
 }
 
 
-extension String {
-    var isAlpha: Bool {
+extension String
+{
+    var isAlpha: Bool
+    {
         return !isEmpty && range(of: "[^a-zA-Z\\s]", options: .regularExpression) == nil
     }
 }

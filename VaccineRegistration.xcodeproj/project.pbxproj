@@ -20,6 +20,8 @@
 		5CC3B194274B7D9C00D84243 /* VaccineRegistrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC3B193274B7D9C00D84243 /* VaccineRegistrationTests.swift */; };
 		5CC3B19E274B7D9C00D84243 /* VaccineRegistrationUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC3B19D274B7D9C00D84243 /* VaccineRegistrationUITests.swift */; };
 		5CC3B1A0274B7D9C00D84243 /* VaccineRegistrationUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC3B19F274B7D9C00D84243 /* VaccineRegistrationUITestsLaunchTests.swift */; };
+		5CE9CBE62750CE8C000B86EB /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CE9CBE52750CE8C000B86EB /* HomeView.swift */; };
+		5CE9CBE82750E5DA000B86EB /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CE9CBE72750E5D9000B86EB /* CardView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,6 +58,8 @@
 		5CC3B199274B7D9C00D84243 /* VaccineRegistrationUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VaccineRegistrationUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5CC3B19D274B7D9C00D84243 /* VaccineRegistrationUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VaccineRegistrationUITests.swift; sourceTree = "<group>"; };
 		5CC3B19F274B7D9C00D84243 /* VaccineRegistrationUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VaccineRegistrationUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		5CE9CBE52750CE8C000B86EB /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		5CE9CBE72750E5D9000B86EB /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,6 +114,8 @@
 			children = (
 				5CC3B17D274B7D9700D84243 /* VaccineRegistrationApp.swift */,
 				5CC3B17F274B7D9700D84243 /* ContentView.swift */,
+				5CE9CBE72750E5D9000B86EB /* CardView.swift */,
+				5CE9CBE52750CE8C000B86EB /* HomeView.swift */,
 				5CB5FE73274E3FAD00950B44 /* FormView.swift */,
 				5CB5FE77274E456500950B44 /* QueryView.swift */,
 				5CC3B181274B7D9B00D84243 /* Assets.xcassets */,
@@ -275,9 +281,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5CE9CBE62750CE8C000B86EB /* HomeView.swift in Sources */,
 				5CB5FE7B274E48CC00950B44 /* Person+CoreDataClass.swift in Sources */,
 				5C02E27B274E92E10076427A /* VaccineRegistration.xcdatamodeld in Sources */,
 				5CB5FE78274E456500950B44 /* QueryView.swift in Sources */,
+				5CE9CBE82750E5DA000B86EB /* CardView.swift in Sources */,
 				5CB5FE7C274E48CC00950B44 /* Person+CoreDataProperties.swift in Sources */,
 				5CC3B187274B7D9B00D84243 /* Persistence.swift in Sources */,
 				5CB5FE74274E3FAD00950B44 /* FormView.swift in Sources */,

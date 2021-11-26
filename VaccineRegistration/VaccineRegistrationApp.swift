@@ -8,11 +8,14 @@
 import SwiftUI
 
 @main
-struct Vaccine_RegistrationApp: App {
+struct Vaccine_RegistrationApp: App
+{
     let persistenceController = PersistenceController.shared
 
-    var body: some Scene {
-        WindowGroup {
+    var body: some Scene
+    {
+        WindowGroup
+        {
             ContentView()
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
         }

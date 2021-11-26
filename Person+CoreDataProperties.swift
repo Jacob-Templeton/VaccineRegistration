@@ -10,9 +10,11 @@ import Foundation
 import CoreData
 
 
-extension Person {
+extension Person
+{
 
-    @nonobjc public class func fetchRequest() -> NSFetchRequest<Person> {
+    @nonobjc public class func fetchRequest() -> NSFetchRequest<Person>
+    {
         return NSFetchRequest<Person>(entityName: "Person")
     }
 
@@ -23,38 +25,47 @@ extension Person {
     @NSManaged public var name: String
     @NSManaged public var gender: String
     
-    var genderType : Gender {
-        set {
+    var genderType : Gender
+    {
+        set
+        {
             gender = newValue.rawValue
         }
-        get {
+        get
+        {
             Gender(rawValue: gender) ?? .Unknown
         }
     }
     
-    var vaccineType : VaccineType {
-        set {
+    var vaccineType : VaccineType
+    {
+        set
+        {
             typeOfVaccine = newValue.rawValue
         }
-        get {
+        get
+        {
             VaccineType(rawValue: typeOfVaccine) ?? .Unknown
         }
     }
 
 }
 
-extension Person : Identifiable {
+extension Person : Identifiable
+{
 
 }
 
-enum Gender: String {
+enum Gender: String
+{
     case male = "Male"
     case female = "Female"
     case other = "Other"
     case Unknown = "Unknown"
 }
 
-enum VaccineType: String {
+enum VaccineType: String
+{
     case HepatitisA = "Hepatitis A"
     case HepatitisB = "Hepatitis B"
     case Coronavirus = "Coronavirus"
