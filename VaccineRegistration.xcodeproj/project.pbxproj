@@ -8,8 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		5C02E27B274E92E10076427A /* VaccineRegistration.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5C02E279274E92E10076427A /* VaccineRegistration.xcdatamodeld */; };
+		5C22E95627537F8500A6D02D /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C22E95527537F8500A6D02D /* Extensions.swift */; };
+		5C62C8762754B43200809624 /* PersonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C62C8752754B43200809624 /* PersonView.swift */; };
+		5C8DC85E2755F02500779289 /* ExportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C8DC85D2755F02500779289 /* ExportView.swift */; };
+		5CA0E9F527526EDA009CA037 /* ButtonOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CA0E9F427526EDA009CA037 /* ButtonOverlay.swift */; };
 		5CB5FE74274E3FAD00950B44 /* FormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CB5FE73274E3FAD00950B44 /* FormView.swift */; };
-		5CB5FE78274E456500950B44 /* QueryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CB5FE77274E456500950B44 /* QueryView.swift */; };
 		5CB5FE7B274E48CC00950B44 /* Person+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CB5FE79274E48CC00950B44 /* Person+CoreDataClass.swift */; };
 		5CB5FE7C274E48CC00950B44 /* Person+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CB5FE7A274E48CC00950B44 /* Person+CoreDataProperties.swift */; };
 		5CC3B17E274B7D9700D84243 /* VaccineRegistrationApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC3B17D274B7D9700D84243 /* VaccineRegistrationApp.swift */; };
@@ -43,8 +46,11 @@
 
 /* Begin PBXFileReference section */
 		5C02E27A274E92E10076427A /* Vaccine_Registration.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Vaccine_Registration.xcdatamodel; sourceTree = "<group>"; };
+		5C22E95527537F8500A6D02D /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		5C62C8752754B43200809624 /* PersonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonView.swift; sourceTree = "<group>"; };
+		5C8DC85D2755F02500779289 /* ExportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExportView.swift; sourceTree = "<group>"; };
+		5CA0E9F427526EDA009CA037 /* ButtonOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonOverlay.swift; sourceTree = "<group>"; };
 		5CB5FE73274E3FAD00950B44 /* FormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormView.swift; sourceTree = "<group>"; };
-		5CB5FE77274E456500950B44 /* QueryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueryView.swift; sourceTree = "<group>"; };
 		5CB5FE79274E48CC00950B44 /* Person+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Person+CoreDataClass.swift"; sourceTree = "<group>"; };
 		5CB5FE7A274E48CC00950B44 /* Person+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Person+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		5CC3B17A274B7D9700D84243 /* VaccineRegistration.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VaccineRegistration.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -113,11 +119,14 @@
 			isa = PBXGroup;
 			children = (
 				5CC3B17D274B7D9700D84243 /* VaccineRegistrationApp.swift */,
+				5C22E95527537F8500A6D02D /* Extensions.swift */,
 				5CC3B17F274B7D9700D84243 /* ContentView.swift */,
-				5CE9CBE72750E5D9000B86EB /* CardView.swift */,
 				5CE9CBE52750CE8C000B86EB /* HomeView.swift */,
+				5C8DC85D2755F02500779289 /* ExportView.swift */,
+				5C62C8752754B43200809624 /* PersonView.swift */,
 				5CB5FE73274E3FAD00950B44 /* FormView.swift */,
-				5CB5FE77274E456500950B44 /* QueryView.swift */,
+				5CA0E9F427526EDA009CA037 /* ButtonOverlay.swift */,
+				5CE9CBE72750E5D9000B86EB /* CardView.swift */,
 				5CC3B181274B7D9B00D84243 /* Assets.xcassets */,
 				5CC3B186274B7D9B00D84243 /* Persistence.swift */,
 				5C02E279274E92E10076427A /* VaccineRegistration.xcdatamodeld */,
@@ -283,11 +292,14 @@
 			files = (
 				5CE9CBE62750CE8C000B86EB /* HomeView.swift in Sources */,
 				5CB5FE7B274E48CC00950B44 /* Person+CoreDataClass.swift in Sources */,
+				5CA0E9F527526EDA009CA037 /* ButtonOverlay.swift in Sources */,
 				5C02E27B274E92E10076427A /* VaccineRegistration.xcdatamodeld in Sources */,
-				5CB5FE78274E456500950B44 /* QueryView.swift in Sources */,
 				5CE9CBE82750E5DA000B86EB /* CardView.swift in Sources */,
+				5C8DC85E2755F02500779289 /* ExportView.swift in Sources */,
 				5CB5FE7C274E48CC00950B44 /* Person+CoreDataProperties.swift in Sources */,
+				5C22E95627537F8500A6D02D /* Extensions.swift in Sources */,
 				5CC3B187274B7D9B00D84243 /* Persistence.swift in Sources */,
+				5C62C8762754B43200809624 /* PersonView.swift in Sources */,
 				5CB5FE74274E3FAD00950B44 /* FormView.swift in Sources */,
 				5CC3B180274B7D9700D84243 /* ContentView.swift in Sources */,
 				5CC3B17E274B7D9700D84243 /* VaccineRegistrationApp.swift in Sources */,

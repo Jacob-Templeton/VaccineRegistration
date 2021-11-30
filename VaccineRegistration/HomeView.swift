@@ -7,165 +7,252 @@
 
 import SwiftUI
 
-struct aGradient: Identifiable
-{
-    var id: Int
-    var name: String
-    var stops: [Gradient.Stop]
-}
-
 struct HomeView: View
 {
     @Environment(\.managedObjectContext) private var viewContext
     
     let records: FetchedResults<Person>
     
-    // MARK: - Color Presets
-    private let purpleGreen = [Gradient.Stop(color: .purple, location: 0.2), Gradient.Stop(color: .blue, location: 0.4), Gradient.Stop(color: .green, location: 0.6)]
+    static let customLinearGradients: [aGradient] = [
+        aGradient(id: 1, name: "flame", stops: [
+            Gradient.Stop(color: .yellow, location: 0.1 ),
+            Gradient.Stop(color: .orange, location: 0.4 ),
+            Gradient.Stop(color: .red   , location: 0.6 ),
+            Gradient.Stop(color: .black , location: 0.8 )]),
+        
+        aGradient(id: 2, name: "reverseFlame", stops: [
+            Gradient.Stop(color: .black , location: 0.2 ),
+            Gradient.Stop(color: .red   , location: 0.4 ),
+            Gradient.Stop(color: .orange, location: 0.7 ),
+            Gradient.Stop(color: .yellow, location: 0.9 )]),
+        
+        aGradient(id: 3, name: "rainbow", stops: [
+            Gradient.Stop(color: .red   , location: 0.1 ),
+            Gradient.Stop(color: .orange, location: 0.25),
+            Gradient.Stop(color: .yellow, location: 0.4 ),
+            Gradient.Stop(color: .green , location: 0.6 ),
+            Gradient.Stop(color: .blue  , location: 0.75),
+            Gradient.Stop(color: .purple, location: 0.9 )]),
+        
+        aGradient(id: 4, name: "reverseRainbow", stops: [
+            Gradient.Stop(color: .purple, location: 0.1 ),
+            Gradient.Stop(color: .blue  , location: 0.25),
+            Gradient.Stop(color: .green , location: 0.4 ),
+            Gradient.Stop(color: .yellow, location: 0.6 ),
+            Gradient.Stop(color: .orange, location: 0.75),
+            Gradient.Stop(color: .red   , location: 0.9 )]),
+        
+        aGradient(id: 5, name: "redBlue", stops: [
+            Gradient.Stop(color: .red   , location: 0.1 ),
+            Gradient.Stop(color: .purple, location: 0.6 ),
+            Gradient.Stop(color: .blue  , location: 1   )]),
+        
+        aGradient(id: 6, name: "blueRed", stops: [
+            Gradient.Stop(color: .blue  , location: 0.1 ),
+            Gradient.Stop(color: .purple, location: 0.6 ),
+            Gradient.Stop(color: .red   , location: 1   )])
+    ]
     
-    let gradients: [aGradient] = [
-            aGradient(id: 1, name: "flame", stops: [
-                Gradient.Stop(color: .yellow, location: 0.1),
-                Gradient.Stop(color: .orange, location: 0.4),
-                Gradient.Stop(color: .red, location: 0.6),
-                Gradient.Stop(color: .black, location: 0.8)]),
-            
-            aGradient(id: 2, name: "reverseFlame", stops: [
-                Gradient.Stop(color: .black, location: 0.2),
-                Gradient.Stop(color: .red, location: 0.4),
-                Gradient.Stop(color: .orange, location: 0.7),
-                Gradient.Stop(color: .yellow, location: 0.9)]),
-            
-            aGradient(id: 3, name: "rainbow", stops: [
-                Gradient.Stop(color: .red, location: 0.1),
-                Gradient.Stop(color: .orange, location: 0.25),
-                Gradient.Stop(color: .yellow, location: 0.4),
-                Gradient.Stop(color: .green, location: 0.6),
-                Gradient.Stop(color: .blue, location: 0.75),
-                Gradient.Stop(color: .purple, location: 0.9)]),
-            
-            aGradient(id: 4, name: "reverseRainbow", stops: [
-                Gradient.Stop(color: .purple, location: 0.1),
-                Gradient.Stop(color: .blue, location: 0.25),
-                Gradient.Stop(color: .green, location: 0.4),
-                Gradient.Stop(color: .yellow, location: 0.6),
-                Gradient.Stop(color: .orange, location: 0.75),
-                Gradient.Stop(color: .red, location: 0.9)]),
-            
-            aGradient(id: 5, name: "redBlue", stops: [
-                Gradient.Stop(color: .red, location: 0.2),
-                Gradient.Stop(color: .purple, location: 0.5),
-                Gradient.Stop(color: .blue, location: 0.8)]),
-            
-            aGradient(id: 6, name: "blueRed", stops: [
-                Gradient.Stop(color: .blue, location: 0.2),
-                Gradient.Stop(color: .purple, location: 0.5),
-                Gradient.Stop(color: .red, location: 0.8)])
-        ]
+    private let gradientLayer = LinearGradient(
+        stops: customLinearGradients[Int.random(in: 0..<customLinearGradients.count)].stops,
+        startPoint: .topLeading,
+        endPoint: .bottomTrailing
+    )
     
-    let cardHeight: CGFloat = 174
-    let cardWidth: CGFloat = 170
-    let imageHeight: CGFloat = 116
-    let imageWidth: CGFloat = 170
-    let cornerRadius: CGFloat = 12
-    let corners: UIRectCorner = [.topRight, .bottomLeft]
+    let cardWidth: CGFloat = 344
+    let cardHeight: CGFloat = 60
     
-    var gradient: LinearGradient
-    {
-        get
-        {
-            return LinearGradient(stops: gradients[Int.random(in: 0..<gradients.count)].stops, startPoint: .leading, endPoint: .trailing)
-        }
-    }
+    @StateObject var data = TemporaryData()
     
+    @State private var shouldPresentForm = false
     @State private var isEditing = false
     
     var body: some View
     {
-        ScrollView(showsIndicators: false)
+        ZStack
         {
-            VStack(spacing: 20)
-            {
-                ForEach(records, id: \.id)
-                { record in
-                    NavigationLink
+            // background
+            // Layer 1
+            getSineWave(
+                width: UIScreen.main.bounds.width,
+                height: UIScreen.main.bounds.height
+            )
+                .foregroundColor(Color(UIColor.systemIndigo.withAlphaComponent(0.3)))
+            // Layer 2
+            getSineWave(
+                width: UIScreen.main.bounds.width,
+                height: UIScreen.main.bounds.height
+            )
+                .foregroundColor(Color(UIColor.systemIndigo.withAlphaComponent(0.3)))
+            // Layer 3
+            getSineWave(
+                width: UIScreen.main.bounds.width,
+                height: UIScreen.main.bounds.height
+            )
+                .foregroundColor(Color(UIColor.systemIndigo.withAlphaComponent(0.3)))
+            
+            GeometryReader
+            { mainView in
+                ScrollView(showsIndicators: false)
+                {
+                    VStack(spacing: 15)
                     {
-                        VStack(alignment: .leading)
-                        {
-                            Group
-                            {
-                                Group
+                        ForEach(records, id: \.id)
+                        { record in
+                            GeometryReader
+                            { item in
+                                ZStack(alignment: .topLeading)
                                 {
-                                    Text("**ID:** \(record.id)")
-                                    Spacer()
-                                    Text("**Name:** \(record.name)")
-                                    Spacer()
-                                    Text("**Birthdate:** \(record.birthday)")
-                                    Spacer()
-                                }
-                                Group
-                                {
-                                    Text("**Vaccination Date:** \(record.dateOfVaccine)")
-                                    Spacer()
-                                    Text("**Gender:** \(record.gender)")
-                                    Spacer()
-                                    Text("**Vaccination Type:** \(record.typeOfVaccine)")
-                                    Spacer()
-                                }
-                            }
-                        }
-                    .navigationTitle("\(record.name)")
-                    .padding(EdgeInsets(top: 20, leading: 10, bottom: 20, trailing: 10))
-                    } label: {
-                        ZStack(alignment: .topLeading)
-                        {
-                            CardView(data: record)
-                                .foregroundGradient(stops: purpleGreen)
-                            .overlay(
-                                RoundedCorner(radius: cornerRadius, corners: corners)
-                                        .stroke(gradient)
-                                        .shadow(color: .secondary, radius: 3, x: 0, y: 0)
-                            )
-                            .background(RoundedCorner(radius: cornerRadius, corners: corners).fill(Color(UIColor.black)).opacity(0.9))
-                            .previewLayout(.fixed(width: 400, height: 60))
-                            .shadow(color: Color(.black).opacity(0.9), radius: 6, x: 20, y: 20)
-                            
-                            if(isEditing)
-                            {
-                                Button(action: {
-                                    if let index = records.firstIndex(of: record) {
-                                        deletePerson(offsets: IndexSet(integer: index))
+                                    ButtonOverlay(record: record, borderGradient: gradientLayer)
+                                    
+                                    if(isEditing)
+                                    {
+                                        Button(
+                                            action:
+                                            {
+                                                if let index = records.firstIndex(of: record)
+                                                {
+                                                    deletePerson(offsets: IndexSet(integer: index))
+                                                }
+                                            },
+                                            label:
+                                            {
+                                                Image(systemName: "minus.circle.fill")
+                                                    .resizable()
+                                                    .frame(width: 20, height: 20)
+                                                    .foregroundStyle(.white, .red)
+                                                    .shadow(color: .red, radius: 3, x: 0, y: 0)
+                                            }
+                                        )
+                                            .zIndex(1)
+                                            .offset(x: -6, y: -6)
                                     }
-                                }, label: {
-                                    Image(systemName: "minus.circle.fill")
-                                        .resizable()
-                                        .frame(width: 20, height: 20)
-                                        .foregroundStyle(.white, .red)
-                                        .shadow(color: .red, radius: 3, x: 0, y: 0)
-                                })
-                                    .zIndex(1)
-                                    .offset(x: -6, y: -6)
+                                }
+                                .scaleEffect(
+                                    scaleValue(
+                                        mainMinY: mainView.frame(in: .global).minY,
+                                        minY: item.frame(in: .global).minY
+                                    ),
+                                    anchor: .topTrailing
+                                )
+                                .opacity(
+                                    Double(
+                                        scaleValue(
+                                            mainMinY: mainView.frame(in: .global).minY,
+                                            minY: item.frame(in: .global).minY
+                                        )
+                                    )
+                                )
                             }
+                            .frame(width: cardWidth, height: cardHeight)
+                            .padding([.bottom, .top], 12)
                         }
+                        Spacer()
+                    }
+                    .padding()
+                }
+                .navigationBarColor(
+                    backgroundColor: UIColor.systemIndigo.withAlphaComponent(0.5),
+                    tintColor: UIColor.black,
+                    shadowImage: "navBarShadow"
+                )
+                .navigationTitle(isEditing ? "Editor" : "Home")
+                .toolbar
+                {
+                    ToolbarItem(placement: .navigationBarTrailing)
+                    {
+                        Button(isEditing ? "Done" : "Edit")
+                        {
+                            isEditing.toggle()
+                        }
+                            .tint(.purple)
+                            .font(Font.body.weight(.semibold))
                     }
                 }
-                Spacer()
             }
-            .padding()
-            /*.background(Image("templateBackground").resizable(resizingMode: .tile).ignoresSafeArea())*/
-        }
-        .navigationTitle(isEditing ? "Editor" : "Home")
-        .toolbar
-        {
-            ToolbarItem(placement: .navigationBarTrailing)
+            
+            VStack
             {
-                Button(isEditing ? "Done" : "Edit")
+                Spacer()
+                HStack
                 {
-                    isEditing.toggle()
+                    Spacer()
+                    Button(
+                        action:
+                        {
+                            self.shouldPresentForm.toggle()
+                        },
+                        label:
+                        {
+                            Image(systemName: "plus.circle")
+                                .symbolRenderingMode(.palette)
+                                .symbolVariant(.fill)
+                                .font(.system(size: 44, weight: .bold))
+                                .foregroundStyle(
+                                    Color.white,
+                                    LinearGradient(stops: [
+                                    Gradient.Stop(color: .purple, location: 0.4),
+                                    Gradient.Stop(color: .blue, location: 0.9)],
+                                    startPoint: .topLeading,
+                                    endPoint: .bottomTrailing)
+                                )
+                                .frame(width: 24, height: 24)
+                        }
+                    )
+                        .padding([.bottom, .trailing], 30)
                 }
-                    .tint(.purple)
-                    .font(Font.body.weight(.semibold))
             }
+        }
+        .fullScreenCover(isPresented: $shouldPresentForm, content: {
+            NavigationView
+            {
+                FormView(data: data)
+                    .navigationTitle("Registration Form")
+            }
+            .navigationBarColor(
+                backgroundColor: UIColor.systemIndigo.withAlphaComponent(0.5),
+                tintColor: UIColor.black,
+                shadowImage: "navBarShadow"
+            )
+            Button(
+                action:
+                {
+                    self.shouldPresentForm.toggle()
+                },
+                label:
+                {
+                    HStack(spacing: 4)
+                    {
+                        Image(systemName: "chevron.left")
+                            .font(.system(size: 22, weight: .semibold))
+                            .foregroundColor(.black)
+                        Text("Back")
+                            .font(.system(size: 18))
+                            .foregroundColor(.black)
+                    }
+                }
+            )
+                .padding(.bottom, 20)
+        })
+        .animation(.easeInOut, value: 1.0)
+    }
+    
+    private func scaleValue(mainMinY: CGFloat, minY: CGFloat) -> CGFloat
+    {
+        withAnimation(Animation.easeOut)
+        {
+            let minScale = (minY - 8) / mainMinY
+            
+            if(minScale < 1)
+            {
+                if(minScale < 0)
+                {
+                    return 0
+                }
+                return minScale
+            }
+            
+            return 1
         }
     }
 
@@ -182,23 +269,5 @@ struct HomeView: View
                 fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
             }
         }
-    }
-}
-
-extension CGFloat
-{
-    static func random() -> CGFloat
-    {
-        return CGFloat(arc4random()) / CGFloat(UInt32.max)
-    }
-}
-
-extension Color
-{
-    static var random: Color
-    {
-        return Color(red: .random(in: 0...1),
-                     green: .random(in: 0...1),
-                     blue: .random(in: 0...1))
     }
 }
