@@ -153,10 +153,11 @@ struct PersonView: View
             
             VStack
             {
-                Spacer() // Push content to bottom side
+                Spacer()
                 HStack
                 {
-                    Spacer() // Push content to right side
+                    Spacer()
+                    // Button to toggle export options on press
                     Button(
                         action:
                         {
@@ -179,6 +180,7 @@ struct PersonView: View
                 }
             }
             
+            // Shows export options and darkens+blur background when showExportOptions is true
             if(showExportOptions)
             {
                 GeometryReader

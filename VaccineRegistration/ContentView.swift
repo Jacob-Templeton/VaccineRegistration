@@ -9,6 +9,7 @@ import SwiftUI
 
 struct ContentView: View
 {
+    // Fetch data
     @FetchRequest(
         entity: Person.entity(),
         sortDescriptors: [

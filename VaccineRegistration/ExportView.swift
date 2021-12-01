@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import UniformTypeIdentifiers
 
 struct ExportView: View
 {
@@ -31,6 +32,7 @@ struct ExportView: View
     }
     
     @State private var scale: CGFloat = 0
+    @State private var isExporting = false
     
     var body: some View
     {
@@ -38,25 +40,31 @@ struct ExportView: View
         {
             HStack(spacing: 12)
             {
+                // Export as file button
                 Button(
                     action:
                     {
-                    UIPasteboard.general.setValue(message, forPasteboardType: "public.plain-text") // Copy to clipboard
+                        isExporting = true;
                     },
                     label:
                     {
-                        Image(systemName: "doc.on.doc")
+                        Image(systemName: "square.and.arrow.up")
+                            .font(.system(size: 20))
                             .frame(width: 38, height: 32)
                             .symbolVariant(.fill)
-                        Text("Copy to Clipboard")
+                        Text("Export as CSV file")
                             .font(.system(size: 24, weight: .semibold))
                     }
                 )
                     .foregroundColor(.black)
+                    .fileExporter(isPresented: $isExporting, document: CSVFile(initialText: message), contentType: UTType.commaSeparatedText)
+                    { result in
+                    }
             }
             
             HStack(spacing: 12)
             {
+                // Save CSV to clipboard button
                 Button(
                     action:
                     {
@@ -65,6 +73,7 @@ struct ExportView: View
                     label:
                     {
                         Image(systemName: "doc.on.doc")
+                            .font(.system(size: 18))
                             .frame(width: 38, height: 32)
                             .symbolVariant(.fill)
                         Text("Copy to Clipboard")
@@ -85,5 +94,29 @@ struct ExportView: View
                 scale = 1
             }
         }
+    }
+}
+
+struct CSVFile: FileDocument {
+    static var readableContentTypes = [UTType.commaSeparatedText]
+    static var writableContentTypes = [UTType.commaSeparatedText]
+
+    var text = ""
+
+    init(initialText: String = "") {
+        text = initialText
+    }
+
+    // This initializer loads data that has been saved previously
+    init(configuration: ReadConfiguration) throws {
+        if let data = configuration.file.regularFileContents {
+            text = String(decoding: data, as: UTF8.self)
+        }
+    }
+
+    // This will be called when the system wants to write our data to disk
+    func fileWrapper(configuration: WriteConfiguration) throws -> FileWrapper {
+        let data = Data(text.utf8)
+        return FileWrapper(regularFileWithContents: data)
     }
 }

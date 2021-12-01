@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+// MARK: - A card view that displays a person's name, gender, and selected vaccine date for easier identification
 struct CardView: View
 {
     let data: Person

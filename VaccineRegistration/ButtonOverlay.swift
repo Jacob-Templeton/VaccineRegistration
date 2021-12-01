@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+// MARK: - Overlays a button template onto each card view
 struct ButtonOverlay: View
 {
     // MARK: - Color Presets
@@ -29,12 +30,14 @@ struct ButtonOverlay: View
     {
         NavigationLink
         {
+            // Links button element to its respective PersonView
             PersonView(initRecord: record)
         }
         label:
         {
             ZStack
             {
+                // Calls card view with button style formatting
                 CardView(data: record)
                     .foregroundGradient(stops: purpleGreen)
                 .overlay(

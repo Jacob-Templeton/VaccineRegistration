@@ -103,8 +103,10 @@ struct HomeView: View
                             { item in
                                 ZStack(alignment: .topLeading)
                                 {
+                                    // Call the card view for each person in the database
                                     ButtonOverlay(record: record, borderGradient: gradientLayer)
                                     
+                                    // If the edit button is toggled, show delete button for each card
                                     if(isEditing)
                                     {
                                         Button(
@@ -159,6 +161,7 @@ struct HomeView: View
                 .navigationTitle(isEditing ? "Editor" : "Home")
                 .toolbar
                 {
+                    // Edit button
                     ToolbarItem(placement: .navigationBarTrailing)
                     {
                         Button(isEditing ? "Done" : "Edit")
@@ -177,6 +180,7 @@ struct HomeView: View
                 HStack
                 {
                     Spacer()
+                    // Button to toggle the for view
                     Button(
                         action:
                         {
@@ -203,6 +207,7 @@ struct HomeView: View
                 }
             }
         }
+        // Presents the form view when shouldPresentForm is true
         .fullScreenCover(isPresented: $shouldPresentForm, content: {
             NavigationView
             {
@@ -237,6 +242,7 @@ struct HomeView: View
         .animation(.easeInOut, value: 1.0)
     }
     
+    // Produces a scale value depending on position in frame - fall away animation
     private func scaleValue(mainMinY: CGFloat, minY: CGFloat) -> CGFloat
     {
         withAnimation(Animation.easeOut)
@@ -256,6 +262,7 @@ struct HomeView: View
         }
     }
 
+    // Deletes a person from the database
     private func deletePerson(offsets: IndexSet) {
         withAnimation {
             offsets.map { records[$0] }.forEach(viewContext.delete)

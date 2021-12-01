@@ -25,6 +25,7 @@ struct FormView : View {
     
     @StateObject var data: TemporaryData
     
+    // MARK: - Focus states for input error alert handling
     @FocusState private var focusedName: Bool
     @FocusState private var focusedGender: Bool
     @FocusState private var focusedVaccineType: Bool
@@ -48,9 +49,11 @@ struct FormView : View {
                 {
                     VStack(alignment: .leading)
                     {
+                        // Name field
                         TextField("Full Name:", text: $data.name)
                             .focused($focusedName)
                         
+                        // Displays name errors
                         if(!focusedName)
                         {
                             if(data.name.isEmpty)
@@ -68,6 +71,7 @@ struct FormView : View {
                         }
                     }
                     
+                    // Birthday date picker
                     DatePicker(
                         selection: $data.birthday,
                         in: ...Date(),
@@ -80,6 +84,7 @@ struct FormView : View {
                     }
                     .accentColor(Color.pink)
                     
+                    // Date of vaccine picker
                     DatePicker(
                         selection: $data.dateOfVaccine,
                         in: Date()...,
@@ -91,7 +96,8 @@ struct FormView : View {
                             .font(Font.body.weight(.semibold))
                     }
                     .accentColor(Color.pink)
-                        
+                    
+                    // Gender option menu
                     VStack(alignment: .leading)
                     {
                         HStack
@@ -113,6 +119,7 @@ struct FormView : View {
                             Text("\(data.gender)")
                         }
                         
+                        // Displays unselected gender type error
                         if(!focusedGender)
                         {
                             if(data.gender.isEmpty)
@@ -124,6 +131,7 @@ struct FormView : View {
                         }
                     }
                     
+                    // Vaccine option menu
                     VStack(alignment: .leading)
                     {
                         HStack
@@ -149,6 +157,7 @@ struct FormView : View {
                             Text("\(data.typeOfVaccine)")
                         }
                         
+                        // Displays unselected vaccine type error
                         if(!focusedVaccineType)
                         {
                             if(data.typeOfVaccine.isEmpty)
@@ -165,6 +174,7 @@ struct FormView : View {
                 hideKeyboard()
             }
             
+            // Submit button
             LargeButton(
                 title: "Submit",
                 backgroundColor: .purple,
@@ -180,6 +190,7 @@ struct FormView : View {
                     isSubmitted        = true   ; // End reset of form
                 }
             )
+                // Disables the button when there are any errors in the input
                 .disabled(data.name.isEmpty || data.gender.isEmpty || data.typeOfVaccine.isEmpty || !data.name.isAlpha)
                 .tint(.purple)
                 .alert(isPresented: $isSubmitted)
@@ -189,6 +200,7 @@ struct FormView : View {
         }
     }
     
+    // Adds a person to the database
     private func addPerson()
     {
         withAnimation
