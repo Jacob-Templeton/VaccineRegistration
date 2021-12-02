@@ -334,19 +334,3 @@ struct VisualEffectView: UIViewRepresentable
     func makeUIView(context: UIViewRepresentableContext<Self>) -> UIVisualEffectView { UIVisualEffectView() }
     func updateUIView(_ uiView: UIVisualEffectView, context: UIViewRepresentableContext<Self>) { uiView.effect = effect }
 }
-
-struct MenuContent: View {
-    var body: some View {
-        List {
-            Text("My Profile").onTapGesture {
-                print("My Profile")
-            }
-            Text("Posts").onTapGesture {
-                print("Posts")
-            }
-            Text("Logout").onTapGesture {
-                print("Logout")
-            }
-        }
-    }
-}

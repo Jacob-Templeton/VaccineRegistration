@@ -29,12 +29,12 @@ struct ContentView: View
         ],
         animation: .default)
     
+    // Hold feteched data
     private var records: FetchedResults<Person>
     
-    let orientationChanged = NotificationCenter.default.publisher(for: UIDevice.orientationDidChangeNotification)
+    private let orientationChanged = NotificationCenter.default.publisher(for: UIDevice.orientationDidChangeNotification)
             .makeConnectable()
             .autoconnect()
-    
     
     @State private var orientation = UIDeviceOrientation.unknown
     
@@ -55,9 +55,11 @@ struct ContentView: View
             .searchBarModifier(backgroundColor: UIColor.white, tintColor: UIColor.systemIndigo.withAlphaComponent(0.5))
             .onChange(of: query)
             { newValue in
+                // Filter record links by name from query input
                 records.nsPredicate = newValue.isEmpty ? nil : NSPredicate(format: "name CONTAINS[c] %@", newValue)
             }
         }
+        // Update orientation throughout app
         .onRotate
         { newOrientation in
             self.orientation = newOrientation
@@ -67,6 +69,7 @@ struct ContentView: View
     }
 }
 
+// Device rotation input handler
 struct DeviceRotationViewModifier: ViewModifier {
     let action: (UIDeviceOrientation) -> Void
 
@@ -79,12 +82,14 @@ struct DeviceRotationViewModifier: ViewModifier {
     }
 }
 
+// Consise call to DeviceRotationViewModifier
 extension View {
     func onRotate(perform action: @escaping (UIDeviceOrientation) -> Void) -> some View {
         self.modifier(DeviceRotationViewModifier(action: action))
     }
 }
 
+// Gradient presets
 class customGradients
 {
     static let linear: [aGradient] = [
@@ -126,12 +131,4 @@ class customGradients
             Gradient.Stop(color: .purple, location: 0.6 ),
             Gradient.Stop(color: .red   , location: 1   )])
     ]
-}
-
-struct ContentView_Previews: PreviewProvider
-{
-    static var previews: some View
-    {
-        ContentView().environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
-    }
 }

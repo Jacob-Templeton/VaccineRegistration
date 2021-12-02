@@ -63,7 +63,7 @@ struct PersonView: View
         )
     }
     
-    @State private var showExportOptions: Bool = false
+    @StateObject private var effects = Effects()
     
     var body: some View
     {
@@ -71,137 +71,88 @@ struct PersonView: View
         {
             Group
             {
-            RoundedCorner(radius: cornerRadius, corners: corners)
-                .strokeBorder(Color(scheme.background), lineWidth: 1)
-                .background(
-                    RoundedCorner(radius: cornerRadius, corners: corners)
-                        .fill(.white)
-                        .shadow(
-                            color: Color(scheme.background.withAlphaComponent(0.9)),
-                            radius: 2,
-                            x: 0,
-                            y: 0
-                        )
-                        .shadow(
-                            color: Color(UIColor.init(red: 0.211, green: 0.211, blue: 0.211, alpha: 0.5)),
-                            radius: 3,
-                            x: 3,
-                            y: 3
-                        )
-                )
-                .frame(
-                    width:  mainWidth,
-                    height: mainHeight
-                )
-            
-            Rectangle()
-                .fill(Color(scheme.background.withAlphaComponent(0.5)))
-                .frame(
-                    width:  mainWidth,
-                    height: mainHeight
-                )
-                .overlay(
-                    wave1
-                        .foregroundColor(Color(scheme.background.withAlphaComponent(0.3)))
-                        .clipped()
-                )
-                .overlay(
-                    wave2
-                        .foregroundColor(Color(scheme.background.withAlphaComponent(0.3)))
-                        .clipped()
-                )
-                .overlay(
-                    wave3
-                        .foregroundColor(Color(scheme.background.withAlphaComponent(0.3)))
-                        .clipped()
-                )
-                .cornerRadius(cornerRadius)
-                .overlay(
-                    VStack
-                    {
-                        Spacer()
-                        HStack
-                        {
-                            Spacer()
-                            // Button to toggle export options on press
-                            Button(
-                                action:
-                                {
-                                    withAnimation
-                                    {
-                                        self.showExportOptions.toggle()
-                                    }
-                                },
-                                label:
-                                {
-                                    Image(systemName: "square.and.arrow.up.circle.fill")
-                                        .font(.system(size: 54, weight: .bold))
-                                        .symbolRenderingMode(.palette)
-                                        .foregroundStyle(.white, Color(scheme.foreground), Color(scheme.foreground))
-                                        .shadow(color: Color(UIColor.black.withAlphaComponent(0.7)), radius: 2, x: 2, y: 2)
-                                        .frame(width: 29.5, height: 29.5)
-                                }
+                // Background rengtangle
+                RoundedCorner(radius: cornerRadius, corners: corners)
+                    .strokeBorder(Color(scheme.background), lineWidth: 1)
+                    .background(
+                        RoundedCorner(radius: cornerRadius, corners: corners)
+                            .fill(.white)
+                            .shadow(
+                                color: Color(scheme.background.withAlphaComponent(0.9)),
+                                radius: 2,
+                                x: 0,
+                                y: 0
                             )
-                        }
-                    }
-                )
-            
-            HStack
-            {
-                VStack(alignment: .leading, spacing: (mainHeight)/12)
+                            .shadow(
+                                color: Color(UIColor.init(red: 0.211, green: 0.211, blue: 0.211, alpha: 0.5)),
+                                radius: 3,
+                                x: 3,
+                                y: 3
+                            )
+                    )
+                    .frame(
+                        width:  mainWidth,
+                        height: mainHeight
+                    )
+                
+                // Wave overlays
+                Rectangle()
+                    .fill(Color(scheme.background.withAlphaComponent(0.5)))
+                    .frame(
+                        width:  mainWidth,
+                        height: mainHeight
+                    )
+                    .overlay(
+                        wave1
+                            .foregroundColor(Color(scheme.background.withAlphaComponent(0.3)))
+                            .clipped()
+                    )
+                    .overlay(
+                        wave2
+                            .foregroundColor(Color(scheme.background.withAlphaComponent(0.3)))
+                            .clipped()
+                    )
+                    .overlay(
+                        wave3
+                            .foregroundColor(Color(scheme.background.withAlphaComponent(0.3)))
+                            .clipped()
+                    )
+                    .cornerRadius(cornerRadius)
+                
+                // User info
+                HStack
                 {
-                    Spacer()
-                    Group
+                    VStack(alignment: .leading, spacing: (mainHeight)/12)
                     {
-                        Text("**ID:** \(record.id)")
-                        Text("**Name:** \(record.name)")
-                        Text("**Birthdate:** \(record.birthday, format: .dateTime.day().month().year())")
+                        Spacer()
+                        Group
+                        {
+                            Text("**ID:** \(record.id)")
+                            Text("**Name:** \(record.name)")
+                            Text("**Birthdate:** \(record.birthday, format: .dateTime.day().month().year())")
+                        }
+                        Group
+                        {
+                            Text("**Vaccination Date:** \(record.dateOfVaccine, format: .dateTime.day().month().year())")
+                            Text("**Gender:** \(record.gender)")
+                            Text("**Vaccination Type:** \(record.typeOfVaccine)")
+                        }
+                        Spacer()
                     }
-                    Group
-                    {
-                        Text("**Vaccination Date:** \(record.dateOfVaccine, format: .dateTime.day().month().year())")
-                        Text("**Gender:** \(record.gender)")
-                        Text("**Vaccination Type:** \(record.typeOfVaccine)")
-                    }
+                        .padding([.top, .bottom], 60)
                     Spacer()
                 }
-                .padding([.top, .bottom], 60)
-                Spacer()
+                    .foregroundColor(Color(scheme.foreground))
+                    .padding([.leading, .trailing], 60)
             }
-            .foregroundColor(Color(scheme.foreground))
-            .padding([.leading, .trailing], 60)
-            }
-            .blur(radius: showExportOptions ? 20 : 0)
+                .blur(radius: effects.shouldBlurView ? 20 : 0)
             
-            if(showExportOptions)
-            {
-                GeometryReader
-                { _ in
-                    VStack
-                    {
-                        Spacer()
-                        HStack
-                        {
-                            Spacer()
-                            ExportView(initRecord: record)
-                            Spacer()
-                        }
-                        Spacer()
-                    }
-                }
-                .background(
-                    Color(UIColor.black.withAlphaComponent(0.3))
-                        .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
-                        .edgesIgnoringSafeArea(.all)
-                        .onTapGesture
-                        {
-                            withAnimation(Animation.easeOut)
-                            {
-                                self.showExportOptions.toggle()
-                            }
-                        }
+            // Overlay export button ontop of the VStack
+            ExportButton(data: record, scheme: scheme, effects: effects)
+                .frame(
+                    width:  mainWidth,
+                    height: mainHeight
                 )
-            }
         }
         .navigationTitle("\(record.name)")
         

@@ -10,7 +10,7 @@ import SwiftUI
 // MARK: - Overlays a button template onto each card view
 struct ButtonOverlay: View
 {
-    // MARK: - Color Presets
+    // MARK: - Button preview text gradient
     private let purpleGreen: [Gradient.Stop] = [
         Gradient.Stop(color: .purple, location: 0.2 ),
         Gradient.Stop(color: .blue  , location: 0.4 ),
@@ -25,6 +25,7 @@ struct ButtonOverlay: View
     let mainWidth: CGFloat
     let mainHeight: CGFloat
     
+    // Animation handlers
     @State private var lineWidth: CGFloat = 90
     @State private var scale: CGFloat = 0
     
@@ -52,6 +53,7 @@ struct ButtonOverlay: View
                         {
                             withAnimation(Animation.interpolatingSpring(stiffness: 60, damping: 15).delay(0.1))
                             {
+                                // Trigger lineWidth animation
                                 lineWidth = 2
                             }
                         }
@@ -64,6 +66,7 @@ struct ButtonOverlay: View
                 .scaleEffect(scale)
                 .onAppear
                 {
+                    // Trigger scale animation
                     withAnimation(Animation.interpolatingSpring(stiffness: 60, damping: 10).delay(0.16))
                     {
                         scale = 1

@@ -32,7 +32,7 @@ struct FormView : View {
     
     @State private var isSubmitted: Bool = false
     
-    // MARK: - Color Presets
+    // MARK: - Error color preset
     private let purpleRed = [
         Gradient.Stop(color: .purple, location: 0.2),
         Gradient.Stop(color: .gray  , location: 0.4),
@@ -43,6 +43,7 @@ struct FormView : View {
     {
         VStack
         {
+            // Simple form style formatting -> contains registration form
             Form
             {
                 Section(header: Text("Personal Info"))
@@ -219,10 +220,8 @@ struct FormView : View {
             }
             catch
             {
-                // Replace this implementation with code to handle the error appropriately.
-                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
                 let nsError = error as NSError
-                fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+                fatalError("Submission error \(nsError), \(nsError.userInfo)")
             }
         }
     }

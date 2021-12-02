@@ -97,6 +97,7 @@ struct ExportView: View
     }
 }
 
+// CSVFile read & write
 struct CSVFile: FileDocument {
     static var readableContentTypes = [UTType.commaSeparatedText]
     static var writableContentTypes = [UTType.commaSeparatedText]

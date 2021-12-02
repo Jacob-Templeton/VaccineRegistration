@@ -11,18 +11,19 @@ struct HomeView: View
 {
     @Environment(\.managedObjectContext) private var viewContext
     
+    // Recieved Constants
     let records: FetchedResults<Person>
-    
     let gradientLayer: LinearGradient
-    
-    let cardWidthInset: CGFloat = 32
-    let cardHeight: CGFloat = 60
-    
     let mainWidth: CGFloat
     let mainHeight: CGFloat
     
+    private let cardWidthInset: CGFloat = 32
+    private let cardHeight: CGFloat = 60
+    
+    // Holds unsubmitted form data until closure of app
     @StateObject var data = TemporaryData()
     
+    // Edit and form button event handlers
     @State private var shouldPresentForm: Bool = false
     @State private var isEditing: Bool = false
     
@@ -52,6 +53,7 @@ struct HomeView: View
             
             GeometryReader
             { mainView in
+                // Lists all queried records in a scrollable view
                 ScrollView(showsIndicators: false)
                 {
                     VStack(spacing: 15)
@@ -89,14 +91,14 @@ struct HomeView: View
                                             .offset(x: -6, y: -6)
                                     }
                                 }
-                                .scaleEffect(
+                                .scaleEffect( // Falling out of view button animation
                                     scaleValue(
                                         mainMinY: mainView.frame(in: .global).minY,
                                         minY: item.frame(in: .global).minY
                                     ),
                                     anchor: .topTrailing
                                 )
-                                .opacity(
+                                .opacity( // Fading out of view button animation
                                     Double(
                                         scaleValue(
                                             mainMinY: mainView.frame(in: .global).minY,
@@ -120,10 +122,9 @@ struct HomeView: View
                 .navigationTitle(isEditing ? "Editor" : "Home")
                 .toolbar
                 {
-                    // Edit button
                     ToolbarItem(placement: .navigationBarTrailing)
                     {
-                        Button(isEditing ? "Done" : "Edit")
+                        Button(isEditing ? "Done" : "Edit") // Edit button
                         {
                             isEditing.toggle()
                         }
@@ -133,13 +134,13 @@ struct HomeView: View
                 }
             }
             
+            // Button to toggle the form view
             VStack
             {
                 Spacer()
                 HStack
                 {
                     Spacer()
-                    // Button to toggle the for view
                     Button(
                         action:
                         {
@@ -230,10 +231,8 @@ struct HomeView: View
             do {
                 try viewContext.save()
             } catch {
-                // Replace this implementation with code to handle the error appropriately.
-                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
                 let nsError = error as NSError
-                fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+                fatalError("Deletion error \(nsError), \(nsError.userInfo)")
             }
         }
     }
