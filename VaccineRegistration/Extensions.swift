@@ -121,6 +121,29 @@ extension Date {
 
 // MARK: - Structs
 // Changes the navigation bar color & shadow
+
+struct SearchBarModifier: ViewModifier
+{
+    init(backgroundColor: UIColor, tintColor: UIColor)
+    {
+        UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]).backgroundColor = backgroundColor
+        UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]).tintColor = tintColor
+    }
+    
+    func body(content: Content) -> some View
+    {
+        content
+    }
+}
+
+extension View
+{
+    func searchBarModifier(backgroundColor: UIColor, tintColor: UIColor) -> some View
+    {
+        self.modifier(SearchBarModifier(backgroundColor: backgroundColor, tintColor: tintColor))
+    }
+}
+
 struct NavigationBarColor: ViewModifier
 {
     init(backgroundColor: UIColor, tintColor: UIColor, shadowColor: UIColor?, shadowImage: String)
@@ -301,5 +324,29 @@ func getSineWave(width: CGFloat, height: CGFloat) -> Path
         )
         path.addLine(to: CGPoint(x: width, y: height))
         path.addLine(to: CGPoint(x: 0, y: height))
+    }
+}
+
+
+struct VisualEffectView: UIViewRepresentable
+{
+    var effect: UIVisualEffect?
+    func makeUIView(context: UIViewRepresentableContext<Self>) -> UIVisualEffectView { UIVisualEffectView() }
+    func updateUIView(_ uiView: UIVisualEffectView, context: UIViewRepresentableContext<Self>) { uiView.effect = effect }
+}
+
+struct MenuContent: View {
+    var body: some View {
+        List {
+            Text("My Profile").onTapGesture {
+                print("My Profile")
+            }
+            Text("Posts").onTapGesture {
+                print("Posts")
+            }
+            Text("Logout").onTapGesture {
+                print("Logout")
+            }
+        }
     }
 }

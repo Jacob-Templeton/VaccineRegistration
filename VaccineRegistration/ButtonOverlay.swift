@@ -19,9 +19,11 @@ struct ButtonOverlay: View
     
     let cornerRadius: CGFloat = 24
     let corners: UIRectCorner = [.topRight, .bottomLeft]
-    let record: Person
     
+    let record: Person
     let borderGradient: LinearGradient
+    let mainWidth: CGFloat
+    let mainHeight: CGFloat
     
     @State private var lineWidth: CGFloat = 90
     @State private var scale: CGFloat = 0
@@ -31,7 +33,7 @@ struct ButtonOverlay: View
         NavigationLink
         {
             // Links button element to its respective PersonView
-            PersonView(initRecord: record)
+            PersonView(initRecord: record, initWidth: mainWidth, initHeight: mainHeight)
         }
         label:
         {

@@ -28,7 +28,7 @@ struct ExportView: View
         "\"\(initRecord.birthday.getFormattedDate(format: "EEEE, MMM d, yyyy"))\"," +
         "\"\(initRecord.dateOfVaccine.getFormattedDate(format: "EEEE, MMM d, yyyy"))\"," +
         "\"\(initRecord.gender)\"," +
-        "\"\(initRecord.typeOfVaccine)\",";
+        "\"\(initRecord.typeOfVaccine)\"";
     }
     
     @State private var scale: CGFloat = 0

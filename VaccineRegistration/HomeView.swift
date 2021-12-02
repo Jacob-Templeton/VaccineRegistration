@@ -13,59 +13,18 @@ struct HomeView: View
     
     let records: FetchedResults<Person>
     
-    static let customLinearGradients: [aGradient] = [
-        aGradient(id: 1, name: "flame", stops: [
-            Gradient.Stop(color: .yellow, location: 0.1 ),
-            Gradient.Stop(color: .orange, location: 0.4 ),
-            Gradient.Stop(color: .red   , location: 0.6 ),
-            Gradient.Stop(color: .black , location: 0.8 )]),
-        
-        aGradient(id: 2, name: "reverseFlame", stops: [
-            Gradient.Stop(color: .black , location: 0.2 ),
-            Gradient.Stop(color: .red   , location: 0.4 ),
-            Gradient.Stop(color: .orange, location: 0.7 ),
-            Gradient.Stop(color: .yellow, location: 0.9 )]),
-        
-        aGradient(id: 3, name: "rainbow", stops: [
-            Gradient.Stop(color: .red   , location: 0.1 ),
-            Gradient.Stop(color: .orange, location: 0.25),
-            Gradient.Stop(color: .yellow, location: 0.4 ),
-            Gradient.Stop(color: .green , location: 0.6 ),
-            Gradient.Stop(color: .blue  , location: 0.75),
-            Gradient.Stop(color: .purple, location: 0.9 )]),
-        
-        aGradient(id: 4, name: "reverseRainbow", stops: [
-            Gradient.Stop(color: .purple, location: 0.1 ),
-            Gradient.Stop(color: .blue  , location: 0.25),
-            Gradient.Stop(color: .green , location: 0.4 ),
-            Gradient.Stop(color: .yellow, location: 0.6 ),
-            Gradient.Stop(color: .orange, location: 0.75),
-            Gradient.Stop(color: .red   , location: 0.9 )]),
-        
-        aGradient(id: 5, name: "redBlue", stops: [
-            Gradient.Stop(color: .red   , location: 0.1 ),
-            Gradient.Stop(color: .purple, location: 0.6 ),
-            Gradient.Stop(color: .blue  , location: 1   )]),
-        
-        aGradient(id: 6, name: "blueRed", stops: [
-            Gradient.Stop(color: .blue  , location: 0.1 ),
-            Gradient.Stop(color: .purple, location: 0.6 ),
-            Gradient.Stop(color: .red   , location: 1   )])
-    ]
+    let gradientLayer: LinearGradient
     
-    private let gradientLayer = LinearGradient(
-        stops: customLinearGradients[Int.random(in: 0..<customLinearGradients.count)].stops,
-        startPoint: .topLeading,
-        endPoint: .bottomTrailing
-    )
-    
-    let cardWidth: CGFloat = 344
+    let cardWidthInset: CGFloat = 32
     let cardHeight: CGFloat = 60
+    
+    let mainWidth: CGFloat
+    let mainHeight: CGFloat
     
     @StateObject var data = TemporaryData()
     
-    @State private var shouldPresentForm = false
-    @State private var isEditing = false
+    @State private var shouldPresentForm: Bool = false
+    @State private var isEditing: Bool = false
     
     var body: some View
     {
@@ -74,20 +33,20 @@ struct HomeView: View
             // background
             // Layer 1
             getSineWave(
-                width: UIScreen.main.bounds.width,
-                height: UIScreen.main.bounds.height
+                width: mainWidth,
+                height: mainHeight
             )
                 .foregroundColor(Color(UIColor.systemIndigo.withAlphaComponent(0.3)))
             // Layer 2
             getSineWave(
-                width: UIScreen.main.bounds.width,
-                height: UIScreen.main.bounds.height
+                width: mainWidth,
+                height: mainHeight
             )
                 .foregroundColor(Color(UIColor.systemIndigo.withAlphaComponent(0.3)))
             // Layer 3
             getSineWave(
-                width: UIScreen.main.bounds.width,
-                height: UIScreen.main.bounds.height
+                width: mainWidth,
+                height: mainHeight
             )
                 .foregroundColor(Color(UIColor.systemIndigo.withAlphaComponent(0.3)))
             
@@ -104,7 +63,7 @@ struct HomeView: View
                                 ZStack(alignment: .topLeading)
                                 {
                                     // Call the card view for each person in the database
-                                    ButtonOverlay(record: record, borderGradient: gradientLayer)
+                                    ButtonOverlay(record: record, borderGradient: gradientLayer, mainWidth: mainWidth, mainHeight: mainHeight)
                                     
                                     // If the edit button is toggled, show delete button for each card
                                     if(isEditing)
@@ -146,7 +105,7 @@ struct HomeView: View
                                     )
                                 )
                             }
-                            .frame(width: cardWidth, height: cardHeight)
+                            .frame(width: mainWidth-cardWidthInset, height: cardHeight)
                             .padding([.bottom, .top], 12)
                         }
                         Spacer()
@@ -207,6 +166,7 @@ struct HomeView: View
                 }
             }
         }
+        
         // Presents the form view when shouldPresentForm is true
         .fullScreenCover(isPresented: $shouldPresentForm, content: {
             NavigationView

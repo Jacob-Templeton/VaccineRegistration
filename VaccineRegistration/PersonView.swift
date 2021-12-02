@@ -42,12 +42,12 @@ struct PersonView: View
     private let wave2: Path
     private let wave3: Path
     
-    init(initRecord: Person)
+    init(initRecord: Person, initWidth: CGFloat, initHeight: CGFloat)
     {
         record = initRecord
         
-        mainWidth = UIScreen.main.bounds.width-36
-        mainHeight = UIScreen.main.bounds.height-168
+        mainWidth = initWidth - 36
+        mainHeight = initWidth < initHeight ? initHeight - 168 : initHeight - 72
         
         wave1 = getSineWave(
             width:  mainWidth,
@@ -69,118 +69,110 @@ struct PersonView: View
     {
         ZStack
         {
-            VStack
+            Group
             {
-                ZStack
-                {
+            RoundedCorner(radius: cornerRadius, corners: corners)
+                .strokeBorder(Color(scheme.background), lineWidth: 1)
+                .background(
                     RoundedCorner(radius: cornerRadius, corners: corners)
-                        .strokeBorder(Color(scheme.background), lineWidth: 1)
-                        .background(
-                            RoundedCorner(radius: cornerRadius, corners: corners)
-                                .fill(.white)
-                                .shadow(
-                                    color: Color(scheme.background.withAlphaComponent(0.9)),
-                                    radius: 2,
-                                    x: 0,
-                                    y: 0
-                                )
-                                .shadow(
-                                    color: Color(UIColor.init(red: 0.211, green: 0.211, blue: 0.211, alpha: 0.5)),
-                                    radius: 3,
-                                    x: 3,
-                                    y: 3
-                                )
+                        .fill(.white)
+                        .shadow(
+                            color: Color(scheme.background.withAlphaComponent(0.9)),
+                            radius: 2,
+                            x: 0,
+                            y: 0
                         )
-                        .frame(
-                            width:  mainWidth,
-                            height: mainHeight
+                        .shadow(
+                            color: Color(UIColor.init(red: 0.211, green: 0.211, blue: 0.211, alpha: 0.5)),
+                            radius: 3,
+                            x: 3,
+                            y: 3
                         )
-                    
-                    Rectangle()
-                        .fill(Color(scheme.background.withAlphaComponent(0.5)))
-                        .frame(
-                            width:  mainWidth,
-                            height: mainHeight
-                        )
-                        .overlay(
-                            wave1
-                                .foregroundColor(Color(scheme.background.withAlphaComponent(0.3)))
-                                .clipped()
-                        )
-                        .overlay(
-                            wave2
-                                .foregroundColor(Color(scheme.background.withAlphaComponent(0.3)))
-                                .clipped()
-                        )
-                        .overlay(
-                            wave3
-                                .foregroundColor(Color(scheme.background.withAlphaComponent(0.3)))
-                                .clipped()
-                        )
-                        .cornerRadius(cornerRadius)
-                    
-                    VStack(alignment: .leading)
+                )
+                .frame(
+                    width:  mainWidth,
+                    height: mainHeight
+                )
+            
+            Rectangle()
+                .fill(Color(scheme.background.withAlphaComponent(0.5)))
+                .frame(
+                    width:  mainWidth,
+                    height: mainHeight
+                )
+                .overlay(
+                    wave1
+                        .foregroundColor(Color(scheme.background.withAlphaComponent(0.3)))
+                        .clipped()
+                )
+                .overlay(
+                    wave2
+                        .foregroundColor(Color(scheme.background.withAlphaComponent(0.3)))
+                        .clipped()
+                )
+                .overlay(
+                    wave3
+                        .foregroundColor(Color(scheme.background.withAlphaComponent(0.3)))
+                        .clipped()
+                )
+                .cornerRadius(cornerRadius)
+                .overlay(
+                    VStack
                     {
                         Spacer()
-                        Group
+                        HStack
                         {
-                            Text("**ID:** \(record.id)")
-                                .padding()
-                            Text("**Name:** \(record.name)")
-                                .padding()
-                            Text("**Birthdate:** \(record.birthday, format: .dateTime.day().month().year())")
-                                .padding()
+                            Spacer()
+                            // Button to toggle export options on press
+                            Button(
+                                action:
+                                {
+                                    withAnimation
+                                    {
+                                        self.showExportOptions.toggle()
+                                    }
+                                },
+                                label:
+                                {
+                                    Image(systemName: "square.and.arrow.up.circle.fill")
+                                        .font(.system(size: 54, weight: .bold))
+                                        .symbolRenderingMode(.palette)
+                                        .foregroundStyle(.white, Color(scheme.foreground), Color(scheme.foreground))
+                                        .shadow(color: Color(UIColor.black.withAlphaComponent(0.7)), radius: 2, x: 2, y: 2)
+                                        .frame(width: 29.5, height: 29.5)
+                                }
+                            )
                         }
-                        Group
-                        {
-                            Text("**Vaccination Date:** \(record.dateOfVaccine, format: .dateTime.day().month().year())")
-                                .padding()
-                            Text("**Gender:** \(record.gender)")
-                                .padding()
-                            Text("**Vaccination Type:** \(record.typeOfVaccine)")
-                                .padding()
-                        }
-                        Spacer()
                     }
-                    .foregroundColor(Color(scheme.foreground))
-                    .padding(20)
+                )
+            
+            HStack
+            {
+                VStack(alignment: .leading, spacing: (mainHeight)/12)
+                {
+                    Spacer()
+                    Group
+                    {
+                        Text("**ID:** \(record.id)")
+                        Text("**Name:** \(record.name)")
+                        Text("**Birthdate:** \(record.birthday, format: .dateTime.day().month().year())")
+                    }
+                    Group
+                    {
+                        Text("**Vaccination Date:** \(record.dateOfVaccine, format: .dateTime.day().month().year())")
+                        Text("**Gender:** \(record.gender)")
+                        Text("**Vaccination Type:** \(record.typeOfVaccine)")
+                    }
+                    Spacer()
                 }
-                .padding()
+                .padding([.top, .bottom], 60)
+                Spacer()
+            }
+            .foregroundColor(Color(scheme.foreground))
+            .padding([.leading, .trailing], 60)
             }
             .blur(radius: showExportOptions ? 20 : 0)
             
-            Spacer()
-            
-            VStack
-            {
-                Spacer()
-                HStack
-                {
-                    Spacer()
-                    // Button to toggle export options on press
-                    Button(
-                        action:
-                        {
-                            withAnimation
-                            {
-                                self.showExportOptions.toggle()
-                            }
-                        },
-                        label:
-                        {
-                            Image(systemName: "square.and.arrow.up.circle.fill")
-                                .font(.system(size: 54, weight: .bold))
-                                .symbolRenderingMode(.palette)
-                                .foregroundStyle(.white, Color(scheme.foreground), Color(scheme.foreground))
-                                .shadow(color: Color(UIColor.black.withAlphaComponent(0.7)), radius: 2, x: 2, y: 2)
-                                .frame(width: 29.5, height: 29.5)
-                        }
-                    )
-                        .padding(EdgeInsets(top: 0, leading: 0, bottom: 10, trailing: 20))
-                }
-            }
-            
-            // Shows export options and darkens+blur background when showExportOptions is true
             if(showExportOptions)
             {
                 GeometryReader
@@ -212,6 +204,6 @@ struct PersonView: View
             }
         }
         .navigationTitle("\(record.name)")
-        .padding(EdgeInsets(top: 20, leading: 10, bottom: 20, trailing: 10))
+        
     }
 }
