@@ -15,7 +15,7 @@ struct ExportView: View
     private let message: String
     
     // Initialize record and message, must be done this way or errors will be
-    // thrown that record was not initlizazed before assigning its elements to
+    // thrown that record was not initialized before assigning its elements to
     // message constant
     init(initRecord: Person)
     {
