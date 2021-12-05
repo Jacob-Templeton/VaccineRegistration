@@ -17,7 +17,7 @@ extension View
      }
 }
 
-// Hides keyboard in consise writing
+// Utility function to hide keyboard concisely
 extension View
 {
     func hideKeyboard()
@@ -195,8 +195,7 @@ extension UIView
     }
 }
 
-// A more customizable rectangle - allows round corners and to choose which corners
-// to round
+// A more customizable rectangle - allows round corners and to choose which corners to round
 struct RoundedCorner: InsettableShape
 {
     var radius: CGFloat = .infinity
@@ -219,8 +218,7 @@ struct RoundedCorner: InsettableShape
     }
 }
 
-// Customizable button template -> overlays shapes to create full buttons instead of
-// text based buttons
+// Customizable button template -> overlays shapes to create full buttons instead of text based buttons
 struct LargeButtonStyle: ButtonStyle
 {
     
