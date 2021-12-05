@@ -163,7 +163,7 @@ struct HomeView: View
                                 )
                         }
                     )
-                        .frame(width: 44, height: 44)
+                        .frame(width: 52, height: 52)
                         .padding([.bottom, .trailing], 20)
                 }
             }

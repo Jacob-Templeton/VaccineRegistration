@@ -40,7 +40,7 @@ struct ExportButton: View
                             .shadow(color: Color(UIColor.black.withAlphaComponent(0.7)), radius: 2, x: 2, y: 2)
                     }
                 )
-                    .frame(width: 54, height: 54)
+                    .frame(width: 58, height: 58)
                     .offset(x: 10, y: 10)
             }
         }
