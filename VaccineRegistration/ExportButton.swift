@@ -33,15 +33,18 @@ struct ExportButton: View
                     label:
                     {
                         Image(systemName: "square.and.arrow.up.circle.fill")
-                            .font(.system(size: 54, weight: .bold))
+                            .resizable()
+                            .font(Font.title.weight(.bold))
                             .symbolRenderingMode(.palette)
                             .foregroundStyle(.white, Color(scheme.foreground), Color(scheme.foreground))
                             .shadow(color: Color(UIColor.black.withAlphaComponent(0.7)), radius: 2, x: 2, y: 2)
-                            .frame(width: 29.5, height: 29.5)
                     }
                 )
+                    .frame(width: 54, height: 54)
+                    .offset(x: 10, y: 10)
             }
         }
+        .blur(radius: effects.shouldBlurView ? 20 : 0)
         
         // Call ExportView and overlay a dark tint to the background view
         if(effects.shouldBlurView)

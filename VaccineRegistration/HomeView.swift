@@ -82,13 +82,13 @@ struct HomeView: View
                                             {
                                                 Image(systemName: "minus.circle.fill")
                                                     .resizable()
-                                                    .frame(width: 20, height: 20)
                                                     .foregroundStyle(.white, .red)
                                                     .shadow(color: .red, radius: 3, x: 0, y: 0)
                                             }
                                         )
+                                            .frame(width: 24, height: 24)
                                             .zIndex(1)
-                                            .offset(x: -6, y: -6)
+                                            .offset(x: -8, y: -8)
                                     }
                                 }
                                 .scaleEffect( // Falling out of view button animation
@@ -149,9 +149,10 @@ struct HomeView: View
                         label:
                         {
                             Image(systemName: "plus.circle")
+                                .resizable()
                                 .symbolRenderingMode(.palette)
                                 .symbolVariant(.fill)
-                                .font(.system(size: 44, weight: .bold))
+                                .font(Font.title.weight(.bold))
                                 .foregroundStyle(
                                     Color.white,
                                     LinearGradient(stops: [
@@ -160,10 +161,10 @@ struct HomeView: View
                                     startPoint: .topLeading,
                                     endPoint: .bottomTrailing)
                                 )
-                                .frame(width: 24, height: 24)
                         }
                     )
-                        .padding([.bottom, .trailing], 30)
+                        .frame(width: 44, height: 44)
+                        .padding([.bottom, .trailing], 20)
                 }
             }
         }
